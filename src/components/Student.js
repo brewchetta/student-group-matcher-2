@@ -1,9 +1,16 @@
-function Student({student}) {
+function Student({student, setStudentDetail}) {
+
+  function handleClick() {
+    setStudentDetail(student)
+  }
+
   return (
-    <p>Student</p>
+    <div onClick={handleClick}>
+
+      <span>{student.name}</span>
+
+    </div>
   )
 }
 
 export default Student
-
-// needs a class, a group, a name, and an idea (can use timestamp or uuid)
