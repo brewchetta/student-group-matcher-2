@@ -11,9 +11,11 @@ function GroupDisplay({groupParticipants, groupName, addUnassignedToGroup, group
   ))
 
   return (
-      <div>
 
-        <h3>{groupName}</h3>
+    <div>
+
+      <h3>{groupName} - {groupParticipants.length} students</h3>
+
 
         {
           groupName !== 'unassigned'
@@ -23,9 +25,13 @@ function GroupDisplay({groupParticipants, groupName, addUnassignedToGroup, group
           null
         }
 
-        {renderedParticipants}
 
-      </div>
+      <ul className="bullet-points-inside flex rows">
+        {renderedParticipants}
+      </ul>
+
+    </div>
+
   )
 }
 
