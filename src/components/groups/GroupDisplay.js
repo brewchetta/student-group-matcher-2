@@ -1,6 +1,19 @@
+import { useState, useEffect } from 'react'
+import { buildGroupsFromArray } from 'utils/arrayUtils'
 import GroupParticipantDisplay from './GroupParticipantDisplay'
 
 function GroupDisplay({groupParticipants, groupName, addUnassignedToGroup, groupNames, moveStudentToGroups}) {
+
+  const [subGroups, setSubGroups] = useState([])
+
+  useEffect(() => {
+    if (groupName !== 'unassigned') {
+      const newGroups = buildGroupsFromArray(groupParticipants)
+      setSubGroups(newGroups)
+    } else {
+      setSubGroups([...groupParticipants])
+    }
+  }, [groupParticipants])
 
   const renderedParticipants = groupParticipants.map(participant => (
     <GroupParticipantDisplay

@@ -5,10 +5,4 @@
 .rows {
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
-
-  li {
-    @include margin-sides(0.5em);
-  }
-
 }
