@@ -34,6 +34,13 @@ function GroupList(props) {
     setGroups(prev => ({...prev, [groupName]: revisedGroup, unassigned: []}))
   }
 
+  const moveStudentToGroups = (student, currentGroupKey, newGroupKey) => {
+    const revisedCurrentGroup = groups[currentGroupKey].filter(s => s !== student)
+    const revisedNewGroup = [...groups[newGroupKey], student]
+    const revisedGroups = {...groups, [currentGroupKey]: revisedCurrentGroup, [newGroupKey]: revisedNewGroup}
+    setGroups(revisedGroups)
+  }
+
   const renderedGroups = Object.keys(groups).map(gKey => (
     gKey === 'unassigned'
     ?
@@ -42,6 +49,8 @@ function GroupList(props) {
       groupParticipants={groups[gKey]}
       groupName={gKey}
       addUnassignedToGroup={addUnassignedToGroup}
+      groupNames={Object.keys(groups)}
+      moveStudentToGroups={moveStudentToGroups}
     />
     :
     <GroupDisplay
@@ -49,6 +58,8 @@ function GroupList(props) {
       groupParticipants={groups[gKey]}
       groupName={gKey}
       addUnassignedToGroup={addUnassignedToGroup}
+      groupNames={Object.keys(groups)}
+      moveStudentToGroups={moveStudentToGroups}
     />
   ))
 

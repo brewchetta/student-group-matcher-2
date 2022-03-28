@@ -4,11 +4,9 @@ function GroupForm({addGroup}) {
 
   const [name, setName] = useState('')
 
-  function resetForm() {
-    setName('')
-  }
+  const resetForm = () => setName('')
 
-  function handleSubmit(e) {
+  const handleSubmit = e => {
     e.preventDefault()
     addGroup(name)
     resetForm()
