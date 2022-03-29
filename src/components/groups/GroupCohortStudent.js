@@ -11,7 +11,7 @@ function GroupCohortStudent({student, handleAddToGroup, groupNames}) {
   return (
     <div>
 
-      <span>{student.name}</span>
+      <span>{student.name} - </span>
 
       {
         groupNames.length
@@ -20,10 +20,10 @@ function GroupCohortStudent({student, handleAddToGroup, groupNames}) {
 
           <>
             <select value={selectedGroup} onChange={e => setSelectedGroup(e.target.value)}>
-              {groupNames.map(name => <option key={name} value={name}>{name}</option>)}
+            {groupNames.map(name => <option key={name} value={name}>{name}</option>)}
             </select>
 
-            <button onClick={() => handleAddToGroup(student, selectedGroup)}>Add to Group</button>
+            <button onClick={() => handleAddToGroup(student, selectedGroup)}>Add</button>
           </>
 
         :

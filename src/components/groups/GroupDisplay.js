@@ -23,24 +23,22 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
     <SubGroupDisplay key={i} participants={sg} {...{groupName, handleRemoveFromGroup}} />
   ))
 
+  const rerollGroup = () => {
+    setSubGroups(buildGroupsFromArray(groupParticipants))
+  }
+
   return (
 
     <div>
 
       <h3>{groupName} - {groupParticipants.length} students</h3>
 
+      <button onClick={() => addAllToGroup(groupName)}>Add All Students</button>
+      <button onClick={() => rerollGroup(groupName)}>Reroll</button>
 
-        {
-          groupName !== 'unassigned'
-          ?
-          <button onClick={() => addAllToGroup(groupName)}>Add Unassigned Students</button>
-          :
-          null
-        }
-
-        <div>
-          {renderedSubGroups}
-        </div>
+      <div>
+        {renderedSubGroups}
+      </div>
 
     </div>
 
