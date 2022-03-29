@@ -5,8 +5,7 @@ function Navbar() {
 
     <nav>
 
-      <Link to='/'>Home</Link>
-      <Link to='/students'>Students</Link>
+      <Link to='/'>Students</Link>
       <Link to='/groups'>Groups</Link>
 
     </nav>
