@@ -23,9 +23,11 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
     <SubGroupDisplay key={i} participants={sg} {...{groupName, handleRemoveFromGroup}} />
   ))
 
-  const rerollGroup = () => {
-    setSubGroups(buildGroupsFromArray(groupParticipants))
-  }
+  const rerollGroup = () => setSubGroups(buildGroupsFromArray(groupParticipants))
+
+  const parseSubgroupToText = (sg, joinString=" - ") => sg.map(student => student.name).join(joinString)
+
+  const copyToClipboard = () => navigator.clipboard.writeText(subGroups.map(sg => parseSubgroupToText(sg)).join('\n'))
 
   return (
 
@@ -35,6 +37,7 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
 
       <button onClick={() => addAllToGroup(groupName)}>Add All Students</button>
       <button onClick={() => rerollGroup(groupName)}>Reroll</button>
+      <button onClick={copyToClipboard}>Copy To Clipboard</button>
 
       <div>
         {renderedSubGroups}
