@@ -5,6 +5,7 @@ import SubGroupDisplay from './SubGroupDisplay'
 
 function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, handleRemoveFromGroup}) {
 
+  const [isOpen, setIsOpen] = useState(false)
   const [subGroups, setSubGroups] = useState([])
 
   useEffect(() => {
@@ -29,11 +30,19 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
 
   const copyToClipboard = () => navigator.clipboard.writeText(subGroups.map(sg => parseSubgroupToText(sg)).join('\n'))
 
+  if (!isOpen) {
+    return (
+      <div>
+        <h3>{groupName} - {groupParticipants.length} students <button onClick={() => setIsOpen(true)}>Open</button></h3>
+      </div>
+    )
+  }
+
   return (
 
     <div>
 
-      <h3>{groupName} - {groupParticipants.length} students</h3>
+      <h3>{groupName} - {groupParticipants.length} students <button onClick={() => setIsOpen(false)}>Close</button></h3>
 
       <button onClick={() => addAllToGroup(groupName)}>Add All Students</button>
       <button onClick={() => rerollGroup(groupName)}>Reroll</button>
