@@ -3,6 +3,7 @@ import { getCohortNames, getStudents } from 'utils/localStorageUtils'
 import CohortSelect from "./CohortSelect"
 import GroupForm from "./GroupForm"
 import GroupDisplay from './GroupDisplay'
+import GroupCohortDisplay from "./GroupCohortDisplay"
 
 function GroupList(props) {
 
@@ -11,6 +12,8 @@ function GroupList(props) {
   const [cohortStudents, setCohortStudents] = useState([])
   const [groups, setGroups] = useState({})
 
+  const groupNames = Object.keys(groups)
+
   useEffect(() => {
     setCohorts(getCohortNames())
     setSelectedCohort(getCohortNames()[0] || '')
@@ -18,7 +21,6 @@ function GroupList(props) {
 
   useEffect(() => {
     setCohortStudents(getStudents(selectedCohort) || [])
-    setGroups({unassigned: getStudents(selectedCohort) || []})
   }, [selectedCohort])
 
   function addGroup(groupName) {
@@ -29,37 +31,37 @@ function GroupList(props) {
     }
   }
 
-  function addUnassignedToGroup(groupName) {
-    const revisedGroup = [...groups[groupName], ...groups.unassigned]
-    setGroups(prev => ({...prev, [groupName]: revisedGroup, unassigned: []}))
+  function addAllToGroup(groupName) {
+    setGroups(prev => ({...prev, [groupName]: [...cohortStudents]}))
   }
 
-  const moveStudentToGroups = (student, currentGroupKey, newGroupKey) => {
-    const revisedCurrentGroup = groups[currentGroupKey].filter(s => s !== student)
-    const revisedNewGroup = [...groups[newGroupKey], student]
-    const revisedGroups = {...groups, [currentGroupKey]: revisedCurrentGroup, [newGroupKey]: revisedNewGroup}
+  const handleAddToGroup = (student, groupKey) => {
+    const duplicateStudent = groups[groupKey].find(s => s.id === student.id)
+    if (!duplicateStudent) {
+      const revisedGroup = [...groups[groupKey], student]
+      setGroups({...groups, [groupKey]: revisedGroup})
+    } else {
+      console.log('student already in that group');
+    }
+  }
+
+  const handleRemoveFromGroup = (student, groupKey) => {
+    const revisedGroup = groups[groupKey].filter(s => s.id !== student.id)
+    const revisedGroups = {...groups, [groupKey]: revisedGroup}
+    if (!revisedGroup.length) {
+      delete revisedGroups[groupKey]
+    }
     setGroups(revisedGroups)
   }
 
   const renderedGroups = Object.keys(groups).map(gKey => (
-    gKey === 'unassigned'
-    ?
     <GroupDisplay
       key={gKey}
       groupParticipants={groups[gKey]}
       groupName={gKey}
-      addUnassignedToGroup={addUnassignedToGroup}
+      addAllToGroup={addAllToGroup}
+      handleRemoveFromGroup={handleRemoveFromGroup}
       groupNames={Object.keys(groups)}
-      moveStudentToGroups={moveStudentToGroups}
-    />
-    :
-    <GroupDisplay
-      key={gKey}
-      groupParticipants={groups[gKey]}
-      groupName={gKey}
-      addUnassignedToGroup={addUnassignedToGroup}
-      groupNames={Object.keys(groups)}
-      moveStudentToGroups={moveStudentToGroups}
     />
   ))
 
@@ -71,6 +73,8 @@ function GroupList(props) {
       <CohortSelect {...{cohorts, selectedCohort, setSelectedCohort}} />
 
       <h3>Cohort: {selectedCohort}</h3>
+
+      <GroupCohortDisplay {...{cohortStudents, handleAddToGroup, groupNames}} />
 
       <GroupForm addGroup={addGroup} />
 

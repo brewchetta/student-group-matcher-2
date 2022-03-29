@@ -1,15 +1,7 @@
-import GroupParticipantSelect from "./GroupParticipantSelect"
-
-function GroupParticipantDisplay({participant, groupNames, moveStudentToGroups, currentGroupName}) {
+function GroupParticipantDisplay({participant, handleRemoveFromGroup, currentGroupName}) {
 
   return (
-    <li>{participant.name}
-
-      <GroupParticipantSelect
-        {...{participant, groupNames, moveStudentToGroups, currentGroupName}}
-      />
-
-    </li>
+    <span style={{marginRight: "1em"}}>{participant.name} <button onClick={() => handleRemoveFromGroup(participant, currentGroupName)}>X</button></span>
   )
 
 }
