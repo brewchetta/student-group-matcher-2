@@ -1,12 +1,26 @@
-$dark-blue: #1572A1;
+$dark-blue: #333C83;
 $light-blue: #9AD0EC;
 $light-pink: #EFDAD7;
-$dark-pink: #E3BEC6;
+$dark-pink: #F24A72;
+$orange: #FDAF75;
+$yellow: #EAEA7F;
 
-$primary-color: $dark-blue;
-$secondary-color: $light-blue;
-$primary-text-color: $light-pink;
-$secondary-text-color: $dark-pink;
+// watermelon
+$wm-dark-green: #65C18C;
+$wm-light-green: #C1F4C5;
+$wm-light-pink: #FFBED8;
+$wm-dark-pink: #FF7BA9;
+
+// neon-pink
+$np-black: #323232;
+$np-dark-pink: #FA4EAB;
+$np-light-pink: #FE83C6;
+$np-white: #FFF2F9;
+
+$primary-color: $np-black;
+$secondary-color: $np-dark-pink;
+$primary-text-color: $np-light-pink;
+$secondary-text-color: $np-white;
 
 $body-padding: 2em;
 

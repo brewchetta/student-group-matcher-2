@@ -13,3 +13,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+label {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+input[type=button], button {
+  cursor: pointer;
+}

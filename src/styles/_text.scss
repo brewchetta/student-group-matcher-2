@@ -1,3 +1,15 @@
 p, span, h1, h2, h3, h4, h5, h6, li, a, label {
   @include text-color($primary-text-color, $secondary-text-color);
 }
+
+.text-color-primary {
+  color: $primary-text-color
+}
+
+.text-color-secondary {
+  color: $secondary-text-color
+}
+
+.text-color-alternate {
+  color: $secondary-color
+}

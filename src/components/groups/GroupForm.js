@@ -16,9 +16,9 @@ function GroupForm({addGroup}) {
     <form onSubmit={handleSubmit}>
 
       <label htmlFor="name">New Group: </label>
-      <input name="name" value={name} onChange={e => setName(e.target.value)} />
+      <input className="border-round-left border-primary pop-focus" name="name" value={name} onChange={e => setName(e.target.value)} />
 
-      <input type="submit" value="Add Group" />
+      <input className="border-round-right border-primary pop-focus background-alternate" type="submit" value="Add Group" />
 
     </form>
   )

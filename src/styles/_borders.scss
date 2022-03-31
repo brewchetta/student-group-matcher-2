@@ -22,3 +22,20 @@
   @include border-smooth-right($input-radius);
   @include border-smooth-left($input-radius);
 }
+
+.pop-focus {
+  box-shadow: 0 0 $secondary-color;
+  transition: box-shadow 0.1s;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 3px $secondary-color;
+
+    & + input, & + button {
+      outline: none;
+      box-shadow: 0 3px $secondary-color;
+      // box-shadow: 0 0 0 2px $secondary-color;
+    }
+
+  }
+}

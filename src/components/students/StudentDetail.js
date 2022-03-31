@@ -5,13 +5,13 @@ function StudentDetail({student, removeStudent}) {
   }
 
   return (
-    <div>
+    <div className='border-primary border-round margin-padding-weak'>
 
       <h3>{student.name}</h3>
 
       <p>Cohort: {student.className}</p>
 
-      <button onClick={handleDeleteClick}>Remove</button>
+      <button className="border-primary background-alternate border-round pop-focus" onClick={handleDeleteClick}>Remove</button>
 
     </div>
   )
