@@ -40,12 +40,12 @@ function StudentForm({addStudent}) {
     <form onSubmit={handleSubmit}>
 
       <label htmlFor="className">Class:</label>
-      <input type="text" name="className" value={studentInput.className} onChange={handleChangeToSpinalCase} />
+      <input className='border-primary border-round' type="text" name="className" value={studentInput.className} onChange={handleChangeToSpinalCase} />
 
       <label htmlFor="name">Student Name:</label>
-      <input type="text" name="name" value={studentInput.name} onChange={handleChangeToCapitalized} />
+      <input className='border-primary border-round-left' type="text" name="name" value={studentInput.name} onChange={handleChangeToCapitalized} />
 
-      <input type="submit" value="Create Student" />
+      <input className="border-primary border-round-right background-alternate" type="submit" value="Create Student" />
 
     </form>
   )

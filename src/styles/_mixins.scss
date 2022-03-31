@@ -18,3 +18,13 @@
     color: $secondary-color;
   }
 }
+
+@mixin border-smooth-right($radius) {
+  border-top-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
+
+@mixin border-smooth-left($radius) {
+  border-top-left-radius: $radius;
+  border-bottom-left-radius: $radius;
+}

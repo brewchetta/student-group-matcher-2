@@ -3,3 +3,22 @@
   margin: 0.2em;
   padding: 0.2em;
 }
+
+.border-primary {
+  border: solid $secondary-text-color 3px;
+}
+
+.border-round-right {
+  @include border-smooth-right($input-radius);
+  border-left: none;
+}
+
+.border-round-left {
+  @include border-smooth-left($input-radius);
+  border-right: none;
+}
+
+.border-round {
+  @include border-smooth-right($input-radius);
+  @include border-smooth-left($input-radius);
+}
