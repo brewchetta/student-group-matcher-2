@@ -17,10 +17,17 @@ $np-dark-pink: #FA4EAB;
 $np-light-pink: #FE83C6;
 $np-white: #FFF2F9;
 
-$primary-color: $np-black;
-$secondary-color: $np-dark-pink;
-$primary-text-color: $np-light-pink;
-$secondary-text-color: $np-white;
+// from website
+$flatiron-black: #000;
+$flatiron-grey: #1F1E2B;
+$flatiron-blue: #20FFF4;
+$flatiron-green: #209961;
+$flatiron-white: #FFF;
+
+$primary-color: $flatiron-grey;
+$secondary-color: $flatiron-green;
+$primary-text-color: $flatiron-white;
+$secondary-text-color: $flatiron-blue;
 
 $body-padding: 2em;
 

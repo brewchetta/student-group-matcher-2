@@ -5,7 +5,7 @@ function StudentDetail({student, removeStudent}) {
   }
 
   return (
-    <div className='border-primary border-round margin-padding-weak'>
+    <div className='border-primary border-round padding-medium' style={{marginTop: "1em"}}>
 
       <h3>{student.name}</h3>
 

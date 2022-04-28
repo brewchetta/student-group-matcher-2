@@ -5,7 +5,7 @@ function Student({student, setStudentDetail}) {
   }
 
   return (
-    <div onClick={handleClick}>
+    <div className="pointer" onClick={handleClick}>
 
       <span>{student.name}</span>
 

@@ -42,7 +42,7 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
 
   return (
 
-    <div className="border-primary border-round margin-padding-weak">
+    <div>
 
       <h3>{groupName} - {groupParticipants.length} students <button className={buttonClassNames} onClick={() => setIsOpen(false)}>Close</button></h3>
 
@@ -50,7 +50,12 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
       <button className={buttonClassNames} onClick={() => rerollGroup(groupName)}>Reroll</button>
       <button className={buttonClassNames} onClick={copyToClipboard}>Copy To Clipboard</button>
 
-      {renderedSubGroups}
+      <div className="flex rows space-around justify-start">
+
+        {renderedSubGroups}
+
+      </div>
+
 
     </div>
 

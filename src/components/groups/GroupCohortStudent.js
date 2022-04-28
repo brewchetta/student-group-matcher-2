@@ -9,9 +9,11 @@ function GroupCohortStudent({student, handleAddToGroup, groupNames}) {
   }, [groupNames, selectedGroup])
 
   return (
-    <div style={{marginBottom: "0.5em"}}>
+    <div>
 
-      <span>{student.name} - </span>
+      <span>{student.name}</span>
+
+      <br/>
 
       {
         groupNames.length

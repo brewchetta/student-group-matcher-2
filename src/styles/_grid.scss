@@ -9,3 +9,12 @@
 .column-2 {
   grid-template-columns: repeat(2, 1fr);
 }
+
+.grid-column-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+}
+
+.gap-medium {
+  grid-gap: 1em;
+}

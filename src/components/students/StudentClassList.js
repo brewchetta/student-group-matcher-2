@@ -15,9 +15,13 @@ function StudentClassList({className, students, setStudentDetail}) {
 
     <div>
 
-      <h3 onClick={handleToggleOpen}>{className}</h3>
+      <h3 className="pointer" onClick={handleToggleOpen}>{className} <span style={ listOpen ? ({transition: "transform 0.2s", display: "inline-block"}) : ({display: "inline-block", transform: "rotate(-90deg)", transition: "transform 0.2s"}) }>▼</span></h3>
 
-      {listOpen ? renderedStudents : null}
+      <div className="grid-column-auto gap-medium border-white border-primary border-round padding-medium">
+
+        {listOpen ? renderedStudents : null}
+
+      </div>
 
     </div>
 

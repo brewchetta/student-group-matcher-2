@@ -4,7 +4,7 @@ function GroupCohortDisplay({cohortStudents, handleAddToGroup, groupNames}) {
 
   return (
 
-    <div>
+    <div className="grid-column-auto gap-medium">
 
       {cohortStudents.map(student => <GroupCohortStudent key={student.id} {...{student, handleAddToGroup, groupNames}} />)}
 
