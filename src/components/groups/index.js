@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
 import { getCohortNames, getStudents } from 'utils/localStorageUtils'
+import { ToastContextProvider } from  'context/ToastContext'
+
 import CohortSelect from "./CohortSelect"
 import GroupForm from "./GroupForm"
 import GroupDisplay from './GroupDisplay'
 import GroupCohortDisplay from "./GroupCohortDisplay"
+import ToastWrapper from "components/shared/ToastWrapper"
 
 function GroupList(props) {
 
@@ -66,7 +69,7 @@ function GroupList(props) {
   ))
 
   return (
-    <>
+    <ToastContextProvider>
 
       <h2>Groups</h2>
 
@@ -80,7 +83,9 @@ function GroupList(props) {
 
       {renderedGroups}
 
-    </>
+      <ToastWrapper />
+
+    </ToastContextProvider>
   )
 }
 

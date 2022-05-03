@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 import CohortStudents from "./CohortStudents"
 import CohortForm from "./CohortForm"
-import CohortToast from "./CohortToast"
+import ToastWrapper from "components/shared/ToastWrapper"
 
 import * as local from 'utils/localStorageUtils'
 
@@ -68,7 +68,7 @@ function CohortList(props) {
 
       {renderedClassLists}
 
-      <CohortToast />
+      <ToastWrapper />
 
     </ToastContextProvider>
   )
