@@ -15,13 +15,14 @@ function Toast({messages, toastType, open, setOpen, className}) {
 
   useEffect(() => {
     const timeoutClock = 3000
+    let timeout
     if (open) {
-      const timeout = setTimeout(() => {
+      timeout = setTimeout(() => {
         setOpen(!open)
       }, timeoutClock)
     }
 
-    // return () => clearTimeout(timeout)
+    return () => clearTimeout(timeout)
   }, [open])
 
   const createMessages = () => (
