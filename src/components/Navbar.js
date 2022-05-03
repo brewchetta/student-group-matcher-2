@@ -5,7 +5,7 @@ function Navbar() {
 
     <nav className="flex row gap-medium">
 
-      <Link to='/'>Students</Link>
+      <Link to='/'>Cohorts</Link>
       <Link to='/groups'>Groups</Link>
 
     </nav>
