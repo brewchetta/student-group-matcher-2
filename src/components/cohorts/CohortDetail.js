@@ -1,19 +1,15 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { useToastContext } from 'context/ToastContext'
-
-import CSVParser from 'utils/csvParser'
 
 import Student from "./Student"
 import CohortStudentForm from "./CohortStudentForm"
+import CohortCSVUploader from "./CohortCSVUploader"
 
 function CohortStudents({className, students, addStudent, removeStudent, deleteCohort}) {
-
-  const csvInputRef = useRef()
 
   const { setToast } = useToastContext()
 
   const [listOpen, setListOpen] = useState(false)
-  const [csvParser, setCSVParser] = useState({})
 
   const renderedStudents = students.map(s => (
     <Student
@@ -23,15 +19,9 @@ function CohortStudents({className, students, addStudent, removeStudent, deleteC
     />
   ))
 
-  const handleChangeFiles = e => {
-    if (csvInputRef.current.files.length) {
-      setCSVParser( new CSVParser(csvInputRef.current) )
-    }
-  }
-
-  const handleAddFromCSV = (e) => {
-    e.preventDefault()
-    console.log(csvParser.parsedNames)
+  const uploadStudentList = parsedNames => {
+    console.log(parsedNames)
+    console.log('TODO: user can choose which names to upload and then will be created for that cohort');
   }
 
   const handleToggleOpen = () => setListOpen(prev => !prev)
@@ -62,11 +52,7 @@ function CohortStudents({className, students, addStudent, removeStudent, deleteC
               <div className="flex row space-between align-center">
                 <CohortStudentForm cohortName={className} addStudent={addStudent} />
 
-                <form onSubmit={handleAddFromCSV} className="background-grey padding-small border-round">
-                  <label style={{marginTop: 0}} htmlFor="csv-upload">Upload CSV</label>
-                  <input onChange={handleChangeFiles} ref={csvInputRef} name="csv-upload" type="file" className="text-white" />
-                  <input type="submit" value="Upload to Cohort" />
-                </form>
+                <CohortCSVUploader uploadStudentList={uploadStudentList} />
 
                 <div>
                   <button className="border-none background-yellow text-black border-round padding-small" onClick={handleDeleteCohort}>Delete Cohort</button>

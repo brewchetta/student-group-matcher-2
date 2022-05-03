@@ -34,10 +34,12 @@ function CohortList(props) {
   }
 
   function addStudent(student) {
-    setStudents(prev => [...prev, student])
-    setClassNames(prev => new Set([...prev, student.className]))
-    const prevStudents = local.getStudents(student.className) || []
-    local.setStudents(student.className, [...prevStudents, student])
+    if (!students.find(s => s.name === student.name && s.className === student.className)) {
+      setStudents(prev => [...prev, student])
+      setClassNames(prev => new Set([...prev, student.className]))
+      const prevStudents = local.getStudents(student.className) || []
+      local.setStudents(student.className, [...prevStudents, student])
+    }
   }
 
   function removeStudent(student) {
