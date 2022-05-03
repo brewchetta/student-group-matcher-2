@@ -49,6 +49,11 @@ function CohortList(props) {
     local.setStudents(student.className, prevStudents.filter(s => s.id !== student.id))
   }
 
+  const deleteCohort = cohortName => {
+    local.removeCohortByName(cohortName)
+    setClassNames(prev => [...prev].filter(name => name !== cohortName))
+  }
+
   const renderedClassLists = Array.from(classNames).map(cN => (
       <CohortStudents
         key={cN}
@@ -57,6 +62,7 @@ function CohortList(props) {
         setStudentDetail={setInspectedStudent}
         addStudent={addStudent}
         removeStudent={removeStudent}
+        deleteCohort={deleteCohort}
       />
   ))
 

@@ -1,8 +1,12 @@
 import { useState } from 'react'
+import { useToastContext } from 'context/ToastContext'
+
 import Student from "./Student"
 import CohortStudentForm from "./CohortStudentForm"
 
-function CohortStudents({className, students, addStudent, removeStudent}) {
+function CohortStudents({className, students, addStudent, removeStudent, deleteCohort}) {
+
+  const { setToast } = useToastContext()
 
   const [listOpen, setListOpen] = useState(false)
 
@@ -15,6 +19,13 @@ function CohortStudents({className, students, addStudent, removeStudent}) {
   ))
 
   const handleToggleOpen = () => setListOpen(prev => !prev)
+
+  const handleDeleteCohort = () => {
+    if (window.confirm(`Are you sure you want to delete ${className} and ${students.length} students?`)) {
+      setToast(prev => ({...prev, toastType: 'error', messages: [`Deleted "${className}" and ${students.length} students`]}))
+      deleteCohort(className)
+    }
+  }
 
   return (
 
@@ -34,6 +45,8 @@ function CohortStudents({className, students, addStudent, removeStudent}) {
               </div>
 
               <CohortStudentForm cohortName={className} addStudent={addStudent} />
+
+              <button onClick={handleDeleteCohort}>Delete Cohort</button>
 
             </div>
           )
