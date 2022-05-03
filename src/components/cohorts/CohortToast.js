@@ -11,7 +11,13 @@ function CohortToast() {
   const setOpen = newState => setToast(prev => ({...prev, open: newState}))
 
   return (
-    <Toast messages={messages} toastType={toastType} open={open} setOpen={setOpen} displayCondition={messages.length} />
+    <Toast
+      messages={messages}
+      toastType={toastType}
+      open={open}
+      setOpen={setOpen}
+      displayCondition={messages.length}
+    />
   )
 
 }
