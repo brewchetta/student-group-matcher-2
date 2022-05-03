@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import CohortStudents from "./CohortStudents"
+import CohortDetail from "./CohortDetail"
 import CohortForm from "./CohortForm"
 import ToastWrapper from "components/shared/ToastWrapper"
 
@@ -55,7 +55,7 @@ function CohortList(props) {
   }
 
   const renderedClassLists = Array.from(classNames).map(cN => (
-      <CohortStudents
+      <CohortDetail
         key={cN}
         students={filterStudentsByClassName(cN)}
         className={cN}
