@@ -20,7 +20,7 @@ function CohortStudents({className, students, addStudent, removeStudent}) {
 
     <div>
 
-      <h3 className="pointer" onClick={handleToggleOpen}>{className} - {students.length} students <span style={ listOpen ? ({transition: "transform 0.2s", display: "inline-block"}) : ({display: "inline-block", transform: "rotate(-90deg)", transition: "transform 0.2s"}) }>▼</span></h3>
+      <h3 className="pointer" onClick={handleToggleOpen}>{className} {"\/\/"} {students.length} students <span style={ listOpen ? ({transition: "transform 0.2s", display: "inline-block"}) : ({display: "inline-block", transform: "rotate(-90deg)", transition: "transform 0.2s"}) }>▼</span></h3>
 
 
         {

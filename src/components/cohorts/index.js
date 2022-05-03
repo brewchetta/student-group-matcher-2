@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import CohortStudents from "./CohortStudents"
 import CohortForm from "./CohortForm"
-import StudentDetail from "./StudentDetail"
 import * as local from 'utils/localStorageUtils'
 
 function CohortList(props) {
@@ -9,6 +8,8 @@ function CohortList(props) {
   const [students, setStudents] = useState([])
   const [classNames, setClassNames] = useState(new Set([]))
   const [inspectedStudent, setInspectedStudent] = useState(null)
+
+  const addCohortName = name => setClassNames( prev => new Set([...prev, name]) )
 
   useEffect(() => {
     const cohorts = new Set(local.getCohortNames())
@@ -58,12 +59,9 @@ function CohortList(props) {
     <>
       <h2>Cohorts List</h2>
 
-
-      {inspectedStudent ? <StudentDetail student={inspectedStudent} removeStudent={removeStudent} /> : null}
+      <CohortForm addCohortName={addCohortName} />
 
       {renderedClassLists}
-
-      <CohortForm />
 
     </>
   )
