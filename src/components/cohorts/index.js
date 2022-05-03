@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react'
+
 import CohortStudents from "./CohortStudents"
 import CohortForm from "./CohortForm"
+import CohortToast from "./CohortToast"
+
 import * as local from 'utils/localStorageUtils'
+
+import { ToastContextProvider } from  'context/ToastContext'
 
 function CohortList(props) {
 
@@ -56,14 +61,16 @@ function CohortList(props) {
   ))
 
   return (
-    <>
+    <ToastContextProvider>
       <h2>Cohorts List</h2>
 
       <CohortForm addCohortName={addCohortName} />
 
       {renderedClassLists}
 
-    </>
+      <CohortToast />
+
+    </ToastContextProvider>
   )
 }
 

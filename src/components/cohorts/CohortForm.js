@@ -1,8 +1,11 @@
 import { useState } from 'react'
 import { v4 as uuid } from 'uuid'
 import { toSpinalCase, capitalize } from 'utils/stringUtils'
+import { useToastContext } from 'context/ToastContext'
 
 function CohortForm({addCohortName}) {
+
+  const { setToast } = useToastContext()
 
   const [input, setInput] = useState('')
 
@@ -17,6 +20,7 @@ function CohortForm({addCohortName}) {
     if (validateInput()) {
       addCohortName(input)
       resetInput()
+      setToast(prev => ({ ...prev, toastType: 'success', messages: [`Added ${input} cohort`] }))
     } else {
       alert('Class must have a name!')
     }

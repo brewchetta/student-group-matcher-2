@@ -40,11 +40,11 @@
 
   &:focus {
     outline: none;
-    box-shadow: 0 3px $flatiron-blue;
+    box-shadow: 0 3px $blue;
 
     & + input, & + button {
       outline: none;
-      box-shadow: 0 3px $flatiron-blue;
+      box-shadow: 0 3px $blue;
       // box-shadow: 0 0 0 2px $secondary-color;
     }
 

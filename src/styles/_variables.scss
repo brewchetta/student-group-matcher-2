@@ -1,26 +1,27 @@
 // --- COLORS ------------------------------------------ //
 
 // from website
-$flatiron-black: #000;
-$flatiron-grey: #1F1E2B;
-$flatiron-blue: #20FFF4;
-$flatiron-green: #209961;
-$flatiron-white: #FFF;
+$black: #000;
+$grey: #1F1E2B;
+$blue: #20FFF4;
+$green: #209961;
+$white: #FFF;
+$yellow: yellow;
 
 $colors: (
-"black": $flatiron-black,
-"grey": $flatiron-grey,
-"blue": $flatiron-blue,
-"green": $flatiron-green,
-"white": $flatiron-white,
-"yellow": yellow
+"black": $black,
+"grey": $grey,
+"blue": $blue,
+"green": $green,
+"white": $white,
+"yellow": $yellow
 );
 // TODO GET YELLOW COLOR
 
-$primary-color: $flatiron-grey;
-$secondary-color: $flatiron-green;
-$primary-text-color: $flatiron-white;
-$secondary-text-color: $flatiron-blue;
+$primary-color: $grey;
+$secondary-color: $green;
+$primary-text-color: $white;
+$secondary-text-color: $blue;
 
 
 // --- BODY ------------------------------------------ //
