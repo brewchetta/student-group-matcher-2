@@ -3,8 +3,6 @@ import GroupParticipantDisplay from './GroupParticipantDisplay'
 
 function GroupSubGroupDisplay({participants, groupName, handleRemoveFromGroup}) {
 
-  console.log(participants);
-
   const renderedParticipants = participants.map(participant => (
     <GroupParticipantDisplay
       key={participant.id}
