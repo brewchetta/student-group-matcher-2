@@ -1,12 +1,20 @@
 import { useState, useEffect } from 'react'
+import { useToastContext } from 'context/ToastContext'
 
 function GroupCohortStudent({student, handleAddToGroup, groupNames}) {
+
+  const { setToast } = useToastContext()
 
   const [selectedGroup, setSelectedGroup] = useState('')
 
   useEffect(() => {
     setSelectedGroup(selectedGroup || groupNames[0] || '')
   }, [groupNames, selectedGroup])
+
+  const handleAdd = () => {
+    handleAddToGroup(student, selectedGroup)
+    setToast(prev => ({...prev, toastType: 'success', messages: [`Added ${student.name} to ${selectedGroup}`]}))
+  }
 
   return (
     <div>
@@ -25,7 +33,7 @@ function GroupCohortStudent({student, handleAddToGroup, groupNames}) {
             {groupNames.map(name => <option key={name} value={name}>{name}</option>)}
             </select>
 
-            <button className="border-green border-round-right text-white background-green" onClick={() => handleAddToGroup(student, selectedGroup)}>Add</button>
+            <button className="border-green border-round-right text-white background-green" onClick={handleAdd}>Add</button>
           </>
 
         :

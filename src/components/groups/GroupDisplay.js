@@ -2,8 +2,11 @@ import { useState, useEffect } from 'react'
 import { buildGroupsFromArray } from 'utils/arrayUtils'
 import GroupParticipantDisplay from './GroupParticipantDisplay'
 import SubGroupDisplay from './GroupSubGroupDisplay'
+import { useToastContext } from 'context/ToastContext'
 
 function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, handleRemoveFromGroup}) {
+
+  const { setToast } = useToastContext()
 
   const [isOpen, setIsOpen] = useState(false)
   const [subGroups, setSubGroups] = useState([])
@@ -27,13 +30,17 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
   const handleAddAll = () => {
     addAllToGroup(groupName)
     setIsOpen(true)
+    setToast(prev => ({...prev, toastType: 'success', messages: [`All students in cohort added to ${groupName}`]}))
   }
 
   const rerollGroup = () => setSubGroups(buildGroupsFromArray(groupParticipants))
 
   const parseSubgroupToText = (sg, joinString=" - ") => sg.map(student => student.name).join(joinString)
 
-  const copyToClipboard = () => navigator.clipboard.writeText(subGroups.map(sg => parseSubgroupToText(sg)).join('\n'))
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(subGroups.map(sg => parseSubgroupToText(sg)).join('\n'))
+    setToast(prev => ({...prev, toastType: 'success', messages: [`${groupName} copied to clipboard`]}))
+  }
 
   const buttonClassNames = "border-none border-round background-grey text-color-primary margin-weak-sides padding-small"
 
