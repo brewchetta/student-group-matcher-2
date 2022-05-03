@@ -18,7 +18,7 @@ function CohortStudentForm({addStudent, cohortName}) {
   }
 
   function validateInput() {
-    return !!studentInput.name.length && !!studentInput.className.length
+    return !!studentInput.name.length
   }
 
   function resetInput() {
@@ -32,7 +32,7 @@ function CohortStudentForm({addStudent, cohortName}) {
       setToast(prev => ({ ...prev, toastType: 'success', messages: [`Added ${studentInput.name} to ${studentInput.className}`] }))
       resetInput()
     } else {
-      alert('Student must have a name and belong to a class!')
+      setToast(prev => ({ ...prev, toastType: 'error', messages: [`Error: Student must have a name!`] }))
     }
   }
 

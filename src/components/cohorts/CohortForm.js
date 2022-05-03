@@ -22,7 +22,7 @@ function CohortForm({addCohortName}) {
       resetInput()
       setToast(prev => ({ ...prev, toastType: 'success', messages: [`Added ${input} cohort`] }))
     } else {
-      alert('Class must have a name!')
+      setToast(prev => ({ ...prev, toastType: 'error', messages: [`Error: Cohort must have a name!`] }))
     }
   }
 
