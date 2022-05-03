@@ -1,3 +1,5 @@
+// --- TEXT COLORS --- //
+
 p, span, h1, h2, h3, h4, h5, h6, li, a, label {
   @include text-color($primary-text-color, $secondary-text-color);
 }
@@ -22,4 +24,18 @@ p, span, h1, h2, h3, h4, h5, h6, li, a, label {
 
 .pointer {
   cursor: pointer;
+}
+
+// --- TEXT DECORATIONS --- //
+
+.decoration-none {
+  text-decoration: none;
+}
+
+.decoration-underline {
+  text-decoration: underline;
+}
+
+.decoration-overline {
+  text-decoration: overline;
 }
