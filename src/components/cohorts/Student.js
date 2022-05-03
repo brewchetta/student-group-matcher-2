@@ -1,7 +1,12 @@
+import { useToastContext } from 'context/ToastContext'
+
 function Student({student, removeStudent}) {
 
-  function handleRemove() {
+  const { setToast } = useToastContext()
+
+  const handleRemove = () => {
     removeStudent(student)
+    setToast(prev => ({...prev, toastType: 'error', messages: [`Removed ${student.name} from ${student.className}`]}))
   }
 
   return (

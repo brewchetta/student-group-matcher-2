@@ -3,10 +3,6 @@ import ConditionalWrapper from 'components/shared/ConditionalWrapper'
 
 function Toast({messages, toastType, open, setOpen, className}) {
 
-  // console.log('MESSAGES:', messages);
-  // console.log('TOAST TYPE:', toastType);
-  // console.log('OPEN:', open);
-
   useEffect(() => {
     if (!open) {
       setOpen(true)
@@ -22,7 +18,7 @@ function Toast({messages, toastType, open, setOpen, className}) {
 
       return () => clearTimeout(timeout)
     }
-  }, [open])
+  }, [open, messages])
 
   const createMessages = () => (
     messages.constructor === Array

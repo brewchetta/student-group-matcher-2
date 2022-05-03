@@ -2,6 +2,10 @@
   background-color: $background-color;
   color: $color;
   border-color: $border-color;
+
+  * {
+    color: inherit;
+  }
 }
 
 .toast {
