@@ -15,7 +15,7 @@ function GroupSubGroupDisplay({participants, groupName, handleRemoveFromGroup}) 
 
   return (
 
-    <div className="flex row background-black border-round margin-padding-weak">
+    <div className="flex row background-grey border-round margin-padding-weak">
       {renderedParticipants}
     </div>
 

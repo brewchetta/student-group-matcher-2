@@ -24,37 +24,58 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
     <SubGroupDisplay key={i} participants={sg} {...{groupName, handleRemoveFromGroup}} />
   ))
 
+  const handleAddAll = () => {
+    addAllToGroup(groupName)
+    setIsOpen(true)
+  }
+
   const rerollGroup = () => setSubGroups(buildGroupsFromArray(groupParticipants))
 
   const parseSubgroupToText = (sg, joinString=" - ") => sg.map(student => student.name).join(joinString)
 
   const copyToClipboard = () => navigator.clipboard.writeText(subGroups.map(sg => parseSubgroupToText(sg)).join('\n'))
 
-  if (!isOpen) {
-    return (
-      <div>
-        <h3>{groupName} - {groupParticipants.length} students <button onClick={() => setIsOpen(true)}>Open</button></h3>
-      </div>
-    )
-  }
-
-  const buttonClassNames = "pop-focus border-primary border-round background-primary text-color-primary margin-weak-sides"
+  const buttonClassNames = "border-none border-round background-grey text-color-primary margin-weak-sides padding-small"
 
   return (
 
-    <div>
+    <div className="background-black padding-small border-round margin-weak-vertical">
 
-      <h3>{groupName} - {groupParticipants.length} students <button className={buttonClassNames} onClick={() => setIsOpen(false)}>Close</button></h3>
+      <h3>
+        <span className="pointer" onClick={() => setIsOpen(prev => !prev)}>{groupName} {"\/\/"} {groupParticipants.length} students</span>
 
-      <button className={buttonClassNames} onClick={() => addAllToGroup(groupName)}>Add All Students</button>
-      <button className={buttonClassNames} onClick={() => rerollGroup(groupName)}>Reroll</button>
-      <button className={buttonClassNames} onClick={copyToClipboard}>Copy To Clipboard</button>
+        <button
+          className={"border-none background-none text-white"}
+          style={
+            isOpen
+            ?
+            ({transition: "transform 0.2s", display: "inline-block"})
+            :
+            ({display: "inline-block", transform: "rotate(-90deg)", transition: "transform 0.2s"})
+          }
+          onClick={() => setIsOpen(prev => !prev)}>▼</button>
 
-      <div className="flex rows space-around justify-start">
+          <button className={buttonClassNames} onClick={handleAddAll}>Add All From Cohort</button>
 
-        {renderedSubGroups}
+          <button className={buttonClassNames} onClick={() => rerollGroup(groupName)}>Reroll</button>
 
-      </div>
+          <button className={buttonClassNames} onClick={copyToClipboard}>Copy To Clipboard</button>
+
+        </h3>
+
+      {
+        isOpen
+        ?
+        (
+          <div className="flex rows space-around justify-start">
+            {renderedSubGroups}
+          </div>
+        )
+        :
+        null
+
+      }
+
 
 
     </div>
