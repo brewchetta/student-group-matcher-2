@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import CohortStudents from "./CohortStudents"
+import CohortForm from "./CohortForm"
 import StudentDetail from "./StudentDetail"
 import * as local from 'utils/localStorageUtils'
 
@@ -48,6 +49,8 @@ function CohortList(props) {
         students={filterStudentsByClassName(cN)}
         className={cN}
         setStudentDetail={setInspectedStudent}
+        addStudent={addStudent}
+        removeStudent={removeStudent}
       />
   ))
 
@@ -59,6 +62,8 @@ function CohortList(props) {
       {inspectedStudent ? <StudentDetail student={inspectedStudent} removeStudent={removeStudent} /> : null}
 
       {renderedClassLists}
+
+      <CohortForm />
 
     </>
   )

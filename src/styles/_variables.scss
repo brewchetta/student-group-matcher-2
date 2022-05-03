@@ -1,21 +1,4 @@
-$dark-blue: #333C83;
-$light-blue: #9AD0EC;
-$light-pink: #EFDAD7;
-$dark-pink: #F24A72;
-$orange: #FDAF75;
-$yellow: #EAEA7F;
-
-// watermelon
-$wm-dark-green: #65C18C;
-$wm-light-green: #C1F4C5;
-$wm-light-pink: #FFBED8;
-$wm-dark-pink: #FF7BA9;
-
-// neon-pink
-$np-black: #323232;
-$np-dark-pink: #FA4EAB;
-$np-light-pink: #FE83C6;
-$np-white: #FFF2F9;
+// --- COLORS ------------------------------------------ //
 
 // from website
 $flatiron-black: #000;
@@ -29,14 +12,22 @@ $colors: (
 "grey": $flatiron-grey,
 "blue": $flatiron-blue,
 "green": $flatiron-green,
-"white": $flatiron-white
+"white": $flatiron-white,
+"yellow": yellow
 );
+// TODO GET YELLOW COLOR
 
 $primary-color: $flatiron-grey;
 $secondary-color: $flatiron-green;
 $primary-text-color: $flatiron-white;
 $secondary-text-color: $flatiron-blue;
 
+
+// --- BODY ------------------------------------------ //
+
 $body-padding: 2em;
+
+
+// --- INPUTS ------------------------------------------ //
 
 $input-radius: 6px;

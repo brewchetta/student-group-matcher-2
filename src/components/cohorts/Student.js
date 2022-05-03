@@ -1,13 +1,19 @@
-function Student({student, setStudentDetail}) {
+function Student({student, removeStudent}) {
 
-  function handleClick() {
-    setStudentDetail(student)
+  function handleRemove() {
+    removeStudent(student)
   }
 
   return (
-    <div className="pointer" onClick={handleClick}>
+    <div>
 
       <span>{student.name}</span>
+      <button
+        className="border-none background-none text-white hover-text-yellow"
+        onClick={handleRemove}
+      >
+        X
+      </button>
 
     </div>
   )

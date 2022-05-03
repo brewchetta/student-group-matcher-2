@@ -2,15 +2,19 @@ import { useState } from 'react'
 import Student from "./Student"
 import CohortStudentForm from "./CohortStudentForm"
 
-function CohortStudents({className, students, setStudentDetail}) {
+function CohortStudents({className, students, addStudent, removeStudent}) {
 
   const [listOpen, setListOpen] = useState(false)
 
-  const renderedStudents = students.map(s => <Student key={s.id} student={s} setStudentDetail={setStudentDetail} />)
+  const renderedStudents = students.map(s => (
+    <Student
+      key={s.id}
+      student={s}
+      removeStudent={removeStudent}
+    />
+  ))
 
-  function handleToggleOpen() {
-    setListOpen(prev => !prev)
-  }
+  const handleToggleOpen = () => setListOpen(prev => !prev)
 
   return (
 
@@ -29,7 +33,7 @@ function CohortStudents({className, students, setStudentDetail}) {
                 {renderedStudents}
               </div>
 
-              <CohortStudentForm cohortName={className} addStudent={(i) => console.log(i)} />
+              <CohortStudentForm cohortName={className} addStudent={addStudent} />
 
             </div>
           )

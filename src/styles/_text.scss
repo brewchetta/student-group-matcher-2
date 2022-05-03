@@ -1,4 +1,4 @@
-// --- TEXT COLORS --- //
+// --- TEXT COLORS ------------------------------------------ //
 
 p, span, h1, h2, h3, h4, h5, h6, li, a, label {
   @include text-color($primary-text-color, $secondary-text-color);
@@ -22,11 +22,18 @@ p, span, h1, h2, h3, h4, h5, h6, li, a, label {
   }
 }
 
+@each $color-name, $color-value in $colors {
+  .hover-text-#{$color-name} {
+    @include hover-text-color($color-value, $color-value)
+  }
+}
+
+
+// --- TEXT DECORATIONS ------------------------------------------ //
+
 .pointer {
   cursor: pointer;
 }
-
-// --- TEXT DECORATIONS --- //
 
 .decoration-none {
   text-decoration: none;
