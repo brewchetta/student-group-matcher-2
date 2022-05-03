@@ -44,9 +44,15 @@ function CohortStudents({className, students, addStudent, removeStudent, deleteC
                 {renderedStudents}
               </div>
 
-              <CohortStudentForm cohortName={className} addStudent={addStudent} />
+              <div className="flex row space-between align-center">
+                <CohortStudentForm cohortName={className} addStudent={addStudent} />
 
-              <button onClick={handleDeleteCohort}>Delete Cohort</button>
+                <div>
+                  <button className="border-none background-yellow text-black border-round padding-small" onClick={handleDeleteCohort}>Delete Cohort</button>
+                </div>
+              </div>
+
+
 
             </div>
           )
