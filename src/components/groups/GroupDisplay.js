@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { buildGroupsFromArray } from 'utils/arrayUtils'
 import GroupParticipantDisplay from './GroupParticipantDisplay'
-import SubGroupDisplay from './SubGroupDisplay'
+import SubGroupDisplay from './GroupSubGroupDisplay'
 
 function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, handleRemoveFromGroup}) {
 

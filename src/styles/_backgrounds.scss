@@ -9,3 +9,9 @@
 .background-alternate {
   background-color: $primary-text-color;
 }
+
+@each $color-name, $color-value in $colors {
+  .background-#{$color-name} {
+    background-color: $color-value;
+  }
+}

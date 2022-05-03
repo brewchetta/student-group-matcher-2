@@ -10,7 +10,7 @@ function CohortSelect({cohorts, selectedCohort, setSelectedCohort}) {
 
     <form>
 
-      <select value={selectedCohort} onChange={handleSelectChange}>
+      <select className="border-primary border-round background-alternate" value={selectedCohort} onChange={handleSelectChange}>
 
         {renderedOptions}
 

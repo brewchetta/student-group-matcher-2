@@ -1,3 +1,23 @@
 .padding-medium {
   padding: 1em;
 }
+
+.margin-padding-weak {
+  @include margin-verticals(1em);
+  @include margin-sides(1em);
+  padding: 1em;
+}
+
+.margin-padding-strong {
+  @include margin-verticals(3em);
+  @include margin-sides(3em);
+  padding: 3em;
+}
+
+.margin-weak-vertical {
+  @include margin-verticals(1em);
+}
+
+.margin-weak-sides {
+  @include margin-sides(1em);
+}
