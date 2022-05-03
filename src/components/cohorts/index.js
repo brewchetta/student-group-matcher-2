@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react'
-import StudentForm from './StudentForm'
-import StudentClassList from "./StudentClassList"
+import CohortStudents from "./CohortStudents"
 import StudentDetail from "./StudentDetail"
 import * as local from 'utils/localStorageUtils'
 
-function StudentList(props) {
+function CohortList(props) {
 
   const [students, setStudents] = useState([])
   const [classNames, setClassNames] = useState(new Set([]))
@@ -44,7 +43,7 @@ function StudentList(props) {
   }
 
   const renderedClassLists = Array.from(classNames).map(cN => (
-      <StudentClassList
+      <CohortStudents
         key={cN}
         students={filterStudentsByClassName(cN)}
         className={cN}
@@ -54,9 +53,8 @@ function StudentList(props) {
 
   return (
     <>
-      <h2>Student List</h2>
+      <h2>Cohorts List</h2>
 
-      <StudentForm addStudent={addStudent} />
 
       {inspectedStudent ? <StudentDetail student={inspectedStudent} removeStudent={removeStudent} /> : null}
 
@@ -66,4 +64,4 @@ function StudentList(props) {
   )
 }
 
-export default StudentList
+export default CohortList

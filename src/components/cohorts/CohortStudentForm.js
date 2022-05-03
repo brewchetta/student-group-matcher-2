@@ -2,20 +2,16 @@ import { useState } from 'react'
 import { v4 as uuid } from 'uuid'
 import { toSpinalCase, capitalize } from 'utils/stringUtils'
 
-function StudentForm({addStudent}) {
+function CohortStudentForm({addStudent, cohortName}) {
 
   const [studentInput, setStudentInput] = useState({
     name: '',
     id: uuid(),
-    className: ''
+    className: cohortName
   })
 
   function handleChangeToCapitalized(e) {
     setStudentInput(prev => ({...prev, [e.target.name]: capitalize(e.target.value)}))
-  }
-
-  function handleChangeToSpinalCase(e) {
-    setStudentInput(prev => ({...prev, [e.target.name]: toSpinalCase(e.target.value)}))
   }
 
   function validateInput() {
@@ -37,12 +33,9 @@ function StudentForm({addStudent}) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="background-grey padding-medium display-inline-block border-round margin-weak-vertical">
 
-      <label htmlFor="className">Class:</label>
-      <input className='border-primary border-round pop-focus' type="text" name="className" value={studentInput.className} onChange={handleChangeToSpinalCase} />
-
-      <label htmlFor="name">Student Name:</label>
+      <label htmlFor="name">Add New Student</label>
       <input className='border-primary border-round-left pop-focus' type="text" name="name" value={studentInput.name} onChange={handleChangeToCapitalized} />
 
       <input className="border-primary border-round-right background-alternate pop-focus" type="submit" value="Create Student" />
@@ -51,4 +44,4 @@ function StudentForm({addStudent}) {
   )
 }
 
-export default StudentForm
+export default CohortStudentForm
