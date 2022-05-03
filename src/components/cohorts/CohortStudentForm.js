@@ -35,7 +35,7 @@ function CohortStudentForm({addStudent, cohortName}) {
   return (
     <form onSubmit={handleSubmit} className="background-grey padding-medium display-inline-block border-round margin-weak-vertical">
 
-      <label htmlFor="name">Add New Student</label>
+      <label htmlFor="name" style={{marginTop: 0}}>Add New Student</label>
       <input className='border-primary border-round-left pop-focus' type="text" name="name" value={studentInput.name} onChange={handleChangeToCapitalized} />
 
       <input className="border-primary border-round-right background-alternate pop-focus" type="submit" value="Create Student" />
