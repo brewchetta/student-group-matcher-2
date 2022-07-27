@@ -1,0 +1,28 @@
+// --- MODAL ------------------------------------- //
+
+.modal-mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: $modal-mask-color;
+}
+
+.modal {
+  position: fixed;
+  overflow-y: auto;
+  left: 50vw;
+  top: 50vh;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.modal.csv-checklist {
+  background-color: $black;
+  height: 80vh;
+  width: 80vw;
+  text-align: center;
+  padding: 1em;
+  border-radius: 0.5em;
+}

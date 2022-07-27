@@ -9,7 +9,7 @@ function WrapWithModal(WrappedComponent) {
             {/* modal mask is clickable and can be closed */}
             <div className="modal-mask" onClick={props.onClickOut}/>
 
-            <div className="modal" style={props.modalStyles} className={props.modalClassName}>
+            <div className="modal" style={props.modalStyles} className={props.modalClassName + " modal"}>
               <WrappedComponent {...props} />
             </div>
 
