@@ -1,0 +1,42 @@
+@mixin toast-mixin($background-color, $color, $border-color) {
+  background-color: $background-color;
+  color: $color;
+  border-color: $border-color;
+
+  * {
+    color: inherit;
+  }
+}
+
+.toast {
+  span {
+    display: block;
+  }
+
+  animation: toast-pop-in 0.5s ease;
+  top: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  right: $body-padding;
+  padding: 0.7em;
+  position: fixed;
+  transition: top 0.5s;
+
+  &.success {
+    @include toast-mixin($green, $white, $black)
+  }
+
+  &.error {
+    @include toast-mixin($yellow, $black, $black)
+  }
+
+  &.closed {
+    top: -10em;
+  }
+
+}
+
+@keyframes toast-pop-in {
+  0% {top: -10em;}
+  100% {top: 1em;}
+}

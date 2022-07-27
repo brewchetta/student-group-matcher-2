@@ -22,3 +22,9 @@ export function setCohortNames(cohortNames) {
 export function clearCohortNames() {
   return localStorage.removeItem('cohort-names')
 }
+
+export function removeCohortByName(className='no-class') {
+  const cohortNames = getCohortNames()
+  setCohortNames(cohortNames.filter(name => name !== className))
+  clearStudents(className)
+}

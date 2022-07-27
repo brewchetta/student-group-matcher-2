@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react'
 import GroupParticipantDisplay from './GroupParticipantDisplay'
 
-function SubGroupDisplay({participants, groupName, handleRemoveFromGroup}) {
-
-  console.log(participants);
+function GroupSubGroupDisplay({participants, groupName, handleRemoveFromGroup}) {
 
   const renderedParticipants = participants.map(participant => (
     <GroupParticipantDisplay
@@ -15,11 +13,11 @@ function SubGroupDisplay({participants, groupName, handleRemoveFromGroup}) {
 
   return (
 
-    <div className="flex row border-primary border-round margin-padding-weak">
+    <div className="flex row background-grey border-round margin-padding-weak">
       {renderedParticipants}
     </div>
 
   )
 }
 
-export default SubGroupDisplay
+export default GroupSubGroupDisplay

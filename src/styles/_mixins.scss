@@ -1,3 +1,5 @@
+// --- MARGIN ------------------------------------------ //
+
 @mixin margin-verticals($width) {
   margin-top: $width;
   margin-bottom: $width;
@@ -7,6 +9,9 @@
   margin-left: $width;
   margin-right: $width;
 }
+
+
+// --- TEXT COLOR ------------------------------------------ //
 
 @mixin text-color($color, $secondary-color) {
   color: $color;
@@ -23,6 +28,27 @@
     color: $color;
   }
 }
+
+@mixin hover-text-color($color, $secondary-color) {
+  &:hover {
+    color: $color;
+
+    &:link {
+      color: $color;
+    }
+
+    &:visited {
+      color: $secondary-color;
+    }
+
+    &:active {
+      color: $color;
+    }
+  }
+
+}
+
+// --- BORDER RADIUS ------------------------------------------ //
 
 @mixin border-smooth-right($radius) {
   border-top-right-radius: $radius;

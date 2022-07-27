@@ -1,3 +1,50 @@
+// --- PADDING ------------------------------------------ //
+
 .padding-medium {
   padding: 1em;
+}
+
+.padding-small {
+  padding: 0.5em;
+}
+
+
+// --- MARGIN ------------------------------------------ //
+
+.margin-weak-vertical {
+  @include margin-verticals(1em);
+}
+
+.margin-weak-sides {
+  @include margin-sides(1em);
+}
+
+
+// --- COMBINED MARGIN AND PADDING ------------------------------------------ //
+
+.margin-padding-weak {
+  @include margin-verticals(1em);
+  @include margin-sides(1em);
+  padding: 1em;
+}
+
+.margin-padding-strong {
+  @include margin-verticals(3em);
+  @include margin-sides(3em);
+  padding: 3em;
+}
+
+
+// --- DISPLAY STYLES ------------------------------------------ //
+
+.display-block {
+  display: block;
+}
+
+.display-inline-block {
+  display: inline-block;
+}
+
+.display-inline {
+  display: inline;
 }

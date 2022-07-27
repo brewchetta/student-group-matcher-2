@@ -1,3 +1,9 @@
+// --- BACKGROUND COLORS ------------------------------------------ //
+
+.background-none {
+  background: none;
+}
+
 .background-primary {
   background-color: $primary-color;
 }
@@ -8,4 +14,10 @@
 
 .background-alternate {
   background-color: $primary-text-color;
+}
+
+@each $color-name, $color-value in $colors {
+  .background-#{$color-name} {
+    background-color: $color-value;
+  }
 }

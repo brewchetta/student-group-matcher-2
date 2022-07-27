@@ -1,25 +1,24 @@
 import { useState } from 'react'
 import { v4 as uuid } from 'uuid'
 import { toSpinalCase, capitalize } from 'utils/stringUtils'
+import { useToastContext } from 'context/ToastContext'
 
-function StudentForm({addStudent}) {
+function CohortStudentForm({addStudent, cohortName}) {
+
+  const { setToast } = useToastContext()
 
   const [studentInput, setStudentInput] = useState({
     name: '',
     id: uuid(),
-    className: ''
+    className: cohortName
   })
 
   function handleChangeToCapitalized(e) {
     setStudentInput(prev => ({...prev, [e.target.name]: capitalize(e.target.value)}))
   }
 
-  function handleChangeToSpinalCase(e) {
-    setStudentInput(prev => ({...prev, [e.target.name]: toSpinalCase(e.target.value)}))
-  }
-
   function validateInput() {
-    return !!studentInput.name.length && !!studentInput.className.length
+    return !!studentInput.name.length
   }
 
   function resetInput() {
@@ -30,19 +29,17 @@ function StudentForm({addStudent}) {
     e.preventDefault()
     if (validateInput()) {
       addStudent(studentInput)
+      setToast(prev => ({ ...prev, toastType: 'success', messages: [`Added ${studentInput.name} to ${studentInput.className}`] }))
       resetInput()
     } else {
-      alert('Student must have a name and belong to a class!')
+      setToast(prev => ({ ...prev, toastType: 'error', messages: [`Error: Student must have a name!`] }))
     }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="background-grey padding-medium display-inline-block border-round margin-weak-vertical">
 
-      <label htmlFor="className">Class:</label>
-      <input className='border-primary border-round pop-focus' type="text" name="className" value={studentInput.className} onChange={handleChangeToSpinalCase} />
-
-      <label htmlFor="name">Student Name:</label>
+      <label htmlFor="name" style={{marginTop: 0}}>Add New Student</label>
       <input className='border-primary border-round-left pop-focus' type="text" name="name" value={studentInput.name} onChange={handleChangeToCapitalized} />
 
       <input className="border-primary border-round-right background-alternate pop-focus" type="submit" value="Create Student" />
@@ -51,4 +48,4 @@ function StudentForm({addStudent}) {
   )
 }
 
-export default StudentForm
+export default CohortStudentForm

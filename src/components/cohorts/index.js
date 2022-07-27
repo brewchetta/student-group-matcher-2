@@ -1,14 +1,20 @@
 import { useState, useEffect } from 'react'
-import StudentForm from './StudentForm'
-import StudentClassList from "./StudentClassList"
-import StudentDetail from "./StudentDetail"
+
+import CohortDetail from "./CohortDetail"
+import CohortForm from "./CohortForm"
+import ToastWrapper from "components/shared/ToastWrapper"
+
 import * as local from 'utils/localStorageUtils'
 
-function StudentList(props) {
+import { ToastContextProvider } from  'context/ToastContext'
+
+function CohortList(props) {
 
   const [students, setStudents] = useState([])
   const [classNames, setClassNames] = useState(new Set([]))
   const [inspectedStudent, setInspectedStudent] = useState(null)
+
+  const addCohortName = name => setClassNames( prev => new Set([...prev, name]) )
 
   useEffect(() => {
     const cohorts = new Set(local.getCohortNames())
@@ -28,10 +34,12 @@ function StudentList(props) {
   }
 
   function addStudent(student) {
-    setStudents(prev => [...prev, student])
-    setClassNames(prev => new Set([...prev, student.className]))
-    const prevStudents = local.getStudents(student.className) || []
-    local.setStudents(student.className, [...prevStudents, student])
+    if (!students.find(s => s.name === student.name && s.className === student.className)) {
+      setStudents(prev => [...prev, student])
+      setClassNames(prev => new Set([...prev, student.className]))
+      const prevStudents = local.getStudents(student.className) || []
+      local.setStudents(student.className, [...prevStudents, student])
+    }
   }
 
   function removeStudent(student) {
@@ -43,27 +51,35 @@ function StudentList(props) {
     local.setStudents(student.className, prevStudents.filter(s => s.id !== student.id))
   }
 
+  const deleteCohort = cohortName => {
+    local.removeCohortByName(cohortName)
+    setClassNames(prev => [...prev].filter(name => name !== cohortName))
+  }
+
   const renderedClassLists = Array.from(classNames).map(cN => (
-      <StudentClassList
+      <CohortDetail
         key={cN}
         students={filterStudentsByClassName(cN)}
         className={cN}
         setStudentDetail={setInspectedStudent}
+        addStudent={addStudent}
+        removeStudent={removeStudent}
+        deleteCohort={deleteCohort}
       />
   ))
 
   return (
-    <>
-      <h2>Student List</h2>
+    <ToastContextProvider>
+      <h2>Cohorts List</h2>
 
-      <StudentForm addStudent={addStudent} />
-
-      {inspectedStudent ? <StudentDetail student={inspectedStudent} removeStudent={removeStudent} /> : null}
+      <CohortForm addCohortName={addCohortName} />
 
       {renderedClassLists}
 
-    </>
+      <ToastWrapper />
+
+    </ToastContextProvider>
   )
 }
 
-export default StudentList
+export default CohortList

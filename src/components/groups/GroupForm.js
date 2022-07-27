@@ -1,15 +1,25 @@
 import { useState } from 'react'
+import { useToastContext } from 'context/ToastContext'
 
 function GroupForm({addGroup}) {
+
+  const { setToast } = useToastContext()
 
   const [name, setName] = useState('')
 
   const resetForm = () => setName('')
 
+  const validateInput = () => !!name.length
+
   const handleSubmit = e => {
     e.preventDefault()
-    addGroup(name)
-    resetForm()
+    if (validateInput()) {
+      addGroup(name)
+      setToast(prev => ({...prev, toastType: 'success', messages: [`Created ${name}`]}))
+      resetForm()
+    } else {
+      setToast(prev => ({...prev, toastType: 'error', messages: [`Error: Your group must have a name!`]}))
+    }
   }
 
   return (
