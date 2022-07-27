@@ -30,15 +30,15 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
 
   const copyToClipboard = () => navigator.clipboard.writeText(subGroups.map(sg => parseSubgroupToText(sg)).join('\n'))
 
+  const buttonClassNames = "pop-focus border-primary border-round background-primary text-color-primary margin-weak-sides"
+
   if (!isOpen) {
     return (
       <div>
-        <h3>{groupName} - {groupParticipants.length} students <button onClick={() => setIsOpen(true)}>Open</button></h3>
+        <h3>{groupName} - {groupParticipants.length} students <button className={buttonClassNames} onClick={() => setIsOpen(true)}>Open</button></h3>
       </div>
     )
   }
-
-  const buttonClassNames = "pop-focus border-primary border-round background-primary text-color-primary margin-weak-sides"
 
   return (
 
