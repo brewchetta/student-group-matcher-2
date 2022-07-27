@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useToastContext } from 'context/ToastContext'
+import { v4 as uuid } from 'uuid'
 
 import Student from "./Student"
 import CohortStudentForm from "./CohortStudentForm"
@@ -21,7 +22,13 @@ function CohortStudents({className, students, addStudent, removeStudent, deleteC
 
   const uploadStudentList = parsedNames => {
     console.log(parsedNames)
-    console.log('TODO: user can choose which names to upload and then will be created for that cohort');
+    parsedNames.forEach(studentName => {
+      addStudent({
+        name: studentName,
+        id: uuid(),
+        className: className
+      })
+    })
   }
 
   const handleToggleOpen = () => setListOpen(prev => !prev)

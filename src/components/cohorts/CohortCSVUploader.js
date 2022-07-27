@@ -1,10 +1,13 @@
 import { useState, useRef } from 'react'
+import { useToastContext } from 'context/ToastContext'
 
 import CSVParser from 'utils/csvParser'
 
 import CohortCSVSelectionSheet from './CohortCSVSelectionSheet'
 
 function CohortCSVUploader({uploadStudentList}) {
+
+  const { setToast } = useToastContext()
 
   const csvInputRef = useRef()
 
@@ -19,7 +22,17 @@ function CohortCSVUploader({uploadStudentList}) {
 
   const handleAddFromCSV = (e) => {
     e.preventDefault()
-    setCSVListOpen(true)
+    if (csvParser.parsedNames) {
+      setCSVListOpen(true)
+    } else {
+      setToast(prev => ({...prev, toastType: 'error', messages: [`Unable to upload CSV`]}))
+    }
+  }
+
+  const handleAddStudentsFromCSV = students => {
+    setCSVListOpen(false)
+    setToast(prev => ({...prev, toastType: 'success', messages: [`Students uploaded!`]}))
+    uploadStudentList(students)
   }
 
   const closeCSVList = () => setCSVListOpen(false)
@@ -42,6 +55,7 @@ function CohortCSVUploader({uploadStudentList}) {
             onClickOut={closeCSVList}
             modalClassName="csv-checklist"
             csvNamesList={csvParser?.parsedNames}
+            handleAddStudentsFromCSV={handleAddStudentsFromCSV}
           />
         :
           null

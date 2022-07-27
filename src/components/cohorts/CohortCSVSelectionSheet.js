@@ -11,7 +11,7 @@ const createHash = namesList => {
 }
 
 // --- COMPONENT --- //
-function CohortCSVSelectionSheet({csvNamesList}) {
+function CohortCSVSelectionSheet({csvNamesList, handleAddStudentsFromCSV}) {
 
   // on open creates an object with keys of student name and value of true (included)
   const [students, setStudents] = useState(createHash(csvNamesList))
@@ -29,8 +29,7 @@ function CohortCSVSelectionSheet({csvNamesList}) {
     for (let student in students) {
       if (students[student]) includedStudents.push(student)
     }
-    console.log(includedStudents);
-    return includedStudents
+    handleAddStudentsFromCSV( includedStudents )
   }
 
   // --- RENDER --- //
