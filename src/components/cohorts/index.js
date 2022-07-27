@@ -21,7 +21,11 @@ function CohortList(props) {
     setClassNames(cohorts)
     cohorts.forEach(c => {
       const localStudents = local.getStudents(c)
-      setStudents(prev => [...prev, ...localStudents])
+      if (localStudents) {
+        setStudents(prev => [...prev, ...localStudents])
+      } else {
+        console.warn(`Could not find local students for ${c} in local storage`);
+      }
     })
   }, [])
 
