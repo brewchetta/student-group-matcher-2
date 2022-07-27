@@ -14,7 +14,7 @@ function Student({student, removeStudent}) {
 
       <span>{student.name}</span>
       <button
-        className="border-none background-none text-grey hover-text-yellow"
+        className="border-none background-none text-light-grey hover-text-yellow"
         onClick={handleRemove}
       >
         X
