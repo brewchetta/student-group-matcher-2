@@ -8,7 +8,10 @@ import * as local from 'utils/localStorageUtils'
 
 import { ToastContextProvider } from  'context/ToastContext'
 
+// --- CohortList COMPONENT --- //
 function CohortList(props) {
+
+  // --- STATE --- //
 
   const [students, setStudents] = useState([])
   const [classNames, setClassNames] = useState(new Set([]))
@@ -16,6 +19,9 @@ function CohortList(props) {
 
   const addCohortName = name => setClassNames( prev => new Set([...prev, name]) )
 
+  // --- EFFECTS --- //
+
+  // on load, get cohort names and students from local storage
   useEffect(() => {
     const cohorts = new Set(local.getCohortNames())
     setClassNames(cohorts)
@@ -29,9 +35,12 @@ function CohortList(props) {
     })
   }, [])
 
+  // whenever cohort names change, set them in local storage
   useEffect(() => {
     local.setCohortNames(Array.from(classNames))
   }, [classNames])
+
+  // --- HELPER FNS --- //
 
   function filterStudentsByClassName(className) {
     return students.filter(s => s.className === className)
@@ -59,6 +68,8 @@ function CohortList(props) {
     local.removeCohortByName(cohortName)
     setClassNames(prev => [...prev].filter(name => name !== cohortName))
   }
+
+  // --- RENDERS --- //
 
   const renderedClassLists = Array.from(classNames).map(cN => (
       <CohortDetail
