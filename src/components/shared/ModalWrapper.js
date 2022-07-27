@@ -7,7 +7,7 @@ function WrapWithModal(WrappedComponent) {
           ?
           <>
             {/* modal mask is clickable and can be closed */}
-            <div className="modal-mask" onClick={props.handleClose}/>
+            <div className="modal-mask" onClick={props.onClickOut}/>
 
             <div className="modal" style={props.modalStyles} className={props.modalClassName}>
               <WrappedComponent {...props} />
@@ -35,5 +35,5 @@ export default WrapWithModal
 // import YourComponent from "..."
 // ...
 // return (
-//    <YourComponent toggleOpen={yourFunction} modalStyles={{display: "flex"}} modalClassName="border-white text-red" />
+//    <YourComponent onClickOut={closeModalFn} modalStyles={{display: "flex"}} modalClassName="border-white text-red" />
 // )
