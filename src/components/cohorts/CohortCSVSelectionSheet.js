@@ -33,6 +33,8 @@ function CohortCSVSelectionSheet({csvNamesList}) {
     return includedStudents
   }
 
+  // --- RENDER --- //
+
   return (
     <div>
       <h2>Students Uploaded From CSV</h2>
@@ -42,6 +44,7 @@ function CohortCSVSelectionSheet({csvNamesList}) {
 
             <label key={name}>
 
+              {/* toggleable checkbox */}
               <input type="checkbox"
                 onChange={() => toggleStudent(name)}
                 checked={students[name] ? true : false}
@@ -54,7 +57,10 @@ function CohortCSVSelectionSheet({csvNamesList}) {
           ))
         }
       </div>
+
+      {/* submit button */}
       <button onClick={handleAddStudents}>Add Students</button>
+
     </div>
   )
 }
