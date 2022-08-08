@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { buildGroupsFromArray } from 'utils/arrayUtils'
 import { getLocalSubGroup, setLocalSubGroup } from 'utils/localStorageUtils'
 import GroupParticipantDisplay from './GroupParticipantDisplay'
@@ -10,6 +10,7 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
   const { setToast } = useToastContext()
   const [isOpen, setIsOpen] = useState(false)
   const [subGroups, setSubGroups] = useState([])
+  const groupCount = useRef(0)
 
   // for setting localStorage state and react state
   const commitSubGroups = newSubGroups => {
@@ -19,6 +20,7 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
 
   // when showing the group, get group data or else roll data for unlogged groups
   useEffect(() => {
+    groupCount.current = groupParticipants.length || 0
     const localSubGroups = getLocalSubGroup(cohortName, groupName) || null
     if (localSubGroups) {
       setSubGroups(localSubGroups)
@@ -26,6 +28,16 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
       rerollGroup()
     }
   }, [])
+
+  // creates a student in their own subgroup when they're added to the group
+  useEffect(() => {
+    if (groupCount.current < groupParticipants.length) {
+      const newSubGroup = [ groupParticipants[groupCount.current] ]
+      const revisedSubGroups = [...subGroups, newSubGroup]
+      commitSubGroups(revisedSubGroups)
+    }
+    groupCount.current = groupParticipants.length
+  }, [groupParticipants])
 
   const handleRemoveFromSubGroup = student => {
     const revisedSubGroups = subGroups.map(group => group.filter(s => s.id !== student.id)).filter(sg => sg.length > 0)
