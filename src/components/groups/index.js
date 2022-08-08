@@ -38,6 +38,7 @@ function GroupList(props) {
 
   function addAllToGroup(groupName) {
     setGroups(prev => ({...prev, [groupName]: [...cohortStudents]}))
+    setLocalGroups(selectedCohort, {...groups, [groupName]: [...cohortStudents]})
   }
 
   const handleAddToGroup = (student, groupKey) => {
@@ -45,6 +46,7 @@ function GroupList(props) {
     if (!duplicateStudent) {
       const revisedGroup = [...groups[groupKey], student]
       setGroups({...groups, [groupKey]: revisedGroup})
+      setLocalGroups(selectedCohort, {...groups, [groupKey]: revisedGroup})
     } else {
       console.log('student already in that group');
     }
@@ -57,11 +59,13 @@ function GroupList(props) {
       delete revisedGroups[groupKey]
     }
     setGroups(revisedGroups)
+    setLocalGroups(selectedCohort, revisedGroups)
   }
 
   const renderedGroups = Object.keys(groups).map(gKey => (
     <GroupDisplay
       key={gKey}
+      cohortName={selectedCohort}
       groupParticipants={groups[gKey]}
       groupName={gKey}
       addAllToGroup={addAllToGroup}

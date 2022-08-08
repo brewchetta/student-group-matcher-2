@@ -42,7 +42,7 @@ export function clearLocalGroups(cohortName='no-class') {
 }
 
 export function getLocalSubGroup(cohortName='no-class', groupName='no-group') {
-  return localStorage.getItem(`sub-group-${cohortName}-${groupName}`)
+  return JSON.parse(localStorage.getItem(`sub-group-${cohortName}-${groupName}`))
 }
 
 export function setLocalSubGroup(cohortName='no-class', groupName='no-group', group) {
