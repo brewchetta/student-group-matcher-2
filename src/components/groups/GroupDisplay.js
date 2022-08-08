@@ -7,6 +7,8 @@ import { useToastContext } from 'context/ToastContext'
 
 function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, handleRemoveFromGroup, cohortName}) {
 
+  // --- STATE --- //
+
   const { setToast } = useToastContext()
   const [isOpen, setIsOpen] = useState(false)
   const [subGroups, setSubGroups] = useState([])
@@ -17,6 +19,28 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
     setSubGroups(newSubGroups)
     setLocalSubGroup(cohortName, groupName, newSubGroups)
   }
+
+  const handleRemoveFromSubGroup = student => {
+    const revisedSubGroups = subGroups.map(group => group.filter(s => s.id !== student.id)).filter(sg => sg.length > 0)
+    commitSubGroups(revisedSubGroups)
+    handleRemoveFromGroup(student, groupName)
+  }
+
+  // adds all students to this group
+  const handleAddAll = () => {
+    addAllToGroup(groupName)
+    setIsOpen(true)
+    setToast(prev => ({...prev, toastType: 'success', messages: [`All students in cohort added to ${groupName}`]}))
+  }
+
+  // randomizes who is in which group
+  const rerollGroup = () => {
+    const rerolledGroups = buildGroupsFromArray(groupParticipants)
+    commitSubGroups(rerolledGroups)
+    return rerolledGroups
+  }
+
+  // --- EFFECTS --- //
 
   // when showing the group, get group data or else roll data for unlogged groups
   useEffect(() => {
@@ -39,29 +63,7 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
     groupCount.current = groupParticipants.length
   }, [groupParticipants])
 
-  const handleRemoveFromSubGroup = student => {
-    const revisedSubGroups = subGroups.map(group => group.filter(s => s.id !== student.id)).filter(sg => sg.length > 0)
-    commitSubGroups(revisedSubGroups)
-    handleRemoveFromGroup(student, groupName)
-  }
-
-  const renderedSubGroups = subGroups.map((sg, i) => (
-    <SubGroupDisplay key={i} participants={sg} {...{groupName, handleRemoveFromSubGroup}} />
-  ))
-
-  // adds all students to this group
-  const handleAddAll = () => {
-    addAllToGroup(groupName)
-    setIsOpen(true)
-    setToast(prev => ({...prev, toastType: 'success', messages: [`All students in cohort added to ${groupName}`]}))
-  }
-
-  // randomizes who is in which group
-  const rerollGroup = () => {
-    const rerolledGroups = buildGroupsFromArray(groupParticipants)
-    commitSubGroups(rerolledGroups)
-    return rerolledGroups
-  }
+  // --- COPY TO CLIPBOARD --- //
 
   // parses sub group to text to copy to clipboard
   const parseSubgroupToText = (sg, joinString=" - ") => sg.map(student => student.name).join(joinString)
@@ -72,8 +74,13 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
     setToast(prev => ({...prev, toastType: 'success', messages: [`${groupName} copied to clipboard`]}))
   }
 
-  const buttonClassNames = "border-none border-round background-grey text-color-primary margin-weak-sides padding-small"
+  // --- RENDERS --- //
 
+  const renderedSubGroups = subGroups.map((sg, i) => (
+    <SubGroupDisplay key={i} participants={sg} {...{groupName, handleRemoveFromSubGroup}} />
+  ))
+
+  const buttonClassNames = "border-none border-round background-grey text-color-primary margin-weak-sides padding-small"
 
   return (
 
