@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import Toast from 'components/shared/Toast'
 
 import { useToastContext } from 'context/ToastContext'

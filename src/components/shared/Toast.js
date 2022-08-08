@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import ConditionalWrapper from 'components/shared/ConditionalWrapper'
 
 function Toast({messages, toastType, open, setOpen, className}) {

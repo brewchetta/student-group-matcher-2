@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import GroupParticipantDisplay from './GroupParticipantDisplay'
 
 function GroupSubGroupDisplay({participants, groupName, handleRemoveFromSubGroup}) {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useToastContext } from 'context/ToastContext'
 import { v4 as uuid } from 'uuid'
 
@@ -44,7 +44,7 @@ function CohortStudents({className, students, addStudent, removeStudent, deleteC
 
     <div>
 
-      <h3 className="pointer" onClick={handleToggleOpen}>{className} {"\/\/"} {students.length} students <button className="border-none text-white background-none" style={ listOpen ? ({transition: "transform 0.2s", display: "inline-block"}) : ({display: "inline-block", transform: "rotate(-90deg)", transition: "transform 0.2s"}) }>▼</button></h3>
+      <h3 className="pointer" onClick={handleToggleOpen}>{className} {"//"} {students.length} students <button className="border-none text-white background-none" style={ listOpen ? ({transition: "transform 0.2s", display: "inline-block"}) : ({display: "inline-block", transform: "rotate(-90deg)", transition: "transform 0.2s"}) }>▼</button></h3>
 
         {
           listOpen

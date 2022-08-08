@@ -8,6 +8,7 @@ function AppRoutes() {
     <Routes>
       <Route path='/' element={<CohortList />} />
       <Route path='groups' element={<GroupList/>} />
+      <Route path='home' element={<Home/>} />
       <Route path='*' element={<code>::404::Looks like that doesn't exist::</code>} />
     </Routes>
   )

@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { buildGroupsFromArray } from 'utils/arrayUtils'
 import { getLocalSubGroup, setLocalSubGroup } from 'utils/localStorageUtils'
-import GroupParticipantDisplay from './GroupParticipantDisplay'
 import SubGroupDisplay from './GroupSubGroupDisplay'
 import { useToastContext } from 'context/ToastContext'
 
@@ -87,7 +86,7 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
     <div className="background-black padding-small border-round margin-weak-vertical">
 
       <h3>
-        <span className="pointer" onClick={() => setIsOpen(prev => !prev)}>{groupName} {"\/\/"} {groupParticipants.length} students</span>
+        <span className="pointer" onClick={() => setIsOpen(prev => !prev)}>{groupName} {"//"} {groupParticipants.length} students</span>
       </h3>
 
         <button

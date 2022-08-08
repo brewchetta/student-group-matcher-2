@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { v4 as uuid } from 'uuid'
-import { toSpinalCase, capitalize } from 'utils/stringUtils'
+import { toSpinalCase } from 'utils/stringUtils'
 import { useToastContext } from 'context/ToastContext'
 
 function CohortForm({addCohortName}) {
