@@ -1,13 +1,13 @@
-export function getStudents (className='no-class') {
-  return JSON.parse(localStorage.getItem(`students-${className}`))
+export function getStudents (cohortName='no-class') {
+  return JSON.parse(localStorage.getItem(`students-${cohortName}`))
 }
 
-export function setStudents(className='no-class', students) {
-  return localStorage.setItem(`students-${className}`, JSON.stringify(students))
+export function setStudents(cohortName='no-class', students) {
+  return localStorage.setItem(`students-${cohortName}`, JSON.stringify(students))
 }
 
-export function clearStudents(className='no-class') {
-  return localStorage.removeItem(`students-${className}`)
+export function clearStudents(cohortName='no-class') {
+  return localStorage.removeItem(`students-${cohortName}`)
 }
 
 export function getCohortNames() {
@@ -23,10 +23,10 @@ export function clearCohortNames() {
   return localStorage.removeItem('cohort-names')
 }
 
-export function removeCohortByName(className='no-class') {
+export function removeCohortByName(cohortName='no-class') {
   const cohortNames = getCohortNames()
-  setCohortNames(cohortNames.filter(name => name !== className))
-  clearStudents(className)
+  setCohortNames(cohortNames.filter(name => name !== cohortName))
+  clearStudents(cohortName)
 }
 
 export function getLocalGroups(cohortName) {
@@ -39,4 +39,16 @@ export function setLocalGroups(cohortName='no-class', groups) {
 
 export function clearLocalGroups(cohortName='no-class') {
   return localStorage.removeItem(`groups-${cohortName}`)
+}
+
+export function getLocalSubGroup(cohortName='no-class', groupName='no-group') {
+  return localStorage.getItem(`sub-group-${cohortName}-${groupName}`)
+}
+
+export function setLocalSubGroup(cohortName='no-class', groupName='no-group', group) {
+  return localStorage.setItem(`sub-group-${cohortName}-${groupName}`, JSON.stringify(group))
+}
+
+export function clearLocalSubGroup(cohortName='no-class', groupName='no-group') {
+  return localStorage.removeItem(`sub-group-${cohortName}-${groupName}`)
 }
