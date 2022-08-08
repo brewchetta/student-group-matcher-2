@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getCohortNames, getStudents } from 'utils/localStorageUtils'
+import { getCohortNames, getStudents, getLocalGroups, setLocalGroups } from 'utils/localStorageUtils'
 import { ToastContextProvider } from  'context/ToastContext'
 
 import CohortSelect from "./CohortSelect"
@@ -24,11 +24,13 @@ function GroupList(props) {
 
   useEffect(() => {
     setCohortStudents(getStudents(selectedCohort) || [])
+    setGroups(getLocalGroups(selectedCohort) || {})
   }, [selectedCohort])
 
   function addGroup(groupName) {
     if (!groups[groupName]) {
       setGroups(prev => ({...prev, [groupName]: []}))
+      setLocalGroups(selectedCohort, {...groups, [groupName]: []})
     } else {
       alert(`A group named ${groupName} already exists for this cohort`)
     }

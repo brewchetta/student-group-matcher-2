@@ -28,3 +28,15 @@ export function removeCohortByName(className='no-class') {
   setCohortNames(cohortNames.filter(name => name !== className))
   clearStudents(className)
 }
+
+export function getLocalGroups(cohortName) {
+  return JSON.parse(localStorage.getItem(`groups-${cohortName}`))
+}
+
+export function setLocalGroups(cohortName='no-class', groups) {
+  return localStorage.setItem(`groups-${cohortName}`, JSON.stringify(groups))
+}
+
+export function clearLocalGroups(cohortName='no-class') {
+  return localStorage.removeItem(`groups-${cohortName}`)
+}
