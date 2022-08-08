@@ -1,11 +1,11 @@
 import { useToastContext } from 'context/ToastContext'
 
-function GroupParticipantDisplay({participant, handleRemoveFromGroup, currentGroupName}) {
+function GroupParticipantDisplay({participant, handleRemoveFromSubGroup, currentGroupName}) {
 
   const { setToast } = useToastContext()
 
   const removeFromGroup = () => {
-    handleRemoveFromGroup(participant, currentGroupName)
+    handleRemoveFromSubGroup(participant)
     setToast(prev => ({...prev, toastType: 'error', messages: [`${participant.name} removed from ${currentGroupName}`]}))
   }
 

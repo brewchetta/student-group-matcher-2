@@ -11,37 +11,50 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
   const [isOpen, setIsOpen] = useState(false)
   const [subGroups, setSubGroups] = useState([])
 
-  useEffect(() => {
-    setSubGroups(buildGroupsFromArray(groupParticipants))
-  }, [groupParticipants, groupName])
+  // for setting localStorage state and react state
+  const commitSubGroups = newSubGroups => {
+    setSubGroups(newSubGroups)
+    setLocalSubGroup(cohortName, groupName, newSubGroups)
+  }
 
-  const renderedParticipants = groupParticipants.map(participant => (
-    <GroupParticipantDisplay
-      key={participant.id}
-      currentGroupName={groupName}
-      {...{participant, handleRemoveFromGroup}}
-    />
-  ))
+  // when showing the group, get group data or else roll data for unlogged groups
+  useEffect(() => {
+    const localSubGroups = getLocalSubGroup(cohortName, groupName) || null
+    if (localSubGroups) {
+      setSubGroups(localSubGroups)
+    } else {
+      rerollGroup()
+    }
+  }, [])
+
+  const handleRemoveFromSubGroup = student => {
+    const revisedSubGroups = subGroups.map(group => group.filter(s => s.id !== student.id)).filter(sg => sg.length > 0)
+    commitSubGroups(revisedSubGroups)
+    handleRemoveFromGroup(student, groupName)
+  }
 
   const renderedSubGroups = subGroups.map((sg, i) => (
-    <SubGroupDisplay key={i} participants={sg} {...{groupName, handleRemoveFromGroup}} />
+    <SubGroupDisplay key={i} participants={sg} {...{groupName, handleRemoveFromSubGroup}} />
   ))
 
+  // adds all students to this group
   const handleAddAll = () => {
     addAllToGroup(groupName)
     setIsOpen(true)
     setToast(prev => ({...prev, toastType: 'success', messages: [`All students in cohort added to ${groupName}`]}))
   }
 
+  // randomizes who is in which group
   const rerollGroup = () => {
     const rerolledGroups = buildGroupsFromArray(groupParticipants)
-    setSubGroups(rerolledGroups)
-    setLocalSubGroup(cohortName, groupName, rerolledGroups)
+    commitSubGroups(rerolledGroups)
     return rerolledGroups
   }
 
+  // parses sub group to text to copy to clipboard
   const parseSubgroupToText = (sg, joinString=" - ") => sg.map(student => student.name).join(joinString)
 
+  // copies group to clipboard
   const copyToClipboard = () => {
     navigator.clipboard.writeText(subGroups.map(sg => parseSubgroupToText(sg)).join('\n'))
     setToast(prev => ({...prev, toastType: 'success', messages: [`${groupName} copied to clipboard`]}))

@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 import GroupParticipantDisplay from './GroupParticipantDisplay'
 
-function GroupSubGroupDisplay({participants, groupName, handleRemoveFromGroup}) {
+function GroupSubGroupDisplay({participants, groupName, handleRemoveFromSubGroup}) {
 
   const renderedParticipants = participants.map(participant => (
     <GroupParticipantDisplay
       key={participant.id}
       currentGroupName={groupName}
-      {...{participant, handleRemoveFromGroup}}
+      {...{participant, handleRemoveFromSubGroup}}
     />
   ))
 
