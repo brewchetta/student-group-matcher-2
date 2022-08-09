@@ -48,3 +48,14 @@
 .display-inline {
   display: inline;
 }
+
+// --- CURSOR STYLES ------------------------------------------ //
+
+.grabbable {
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+}

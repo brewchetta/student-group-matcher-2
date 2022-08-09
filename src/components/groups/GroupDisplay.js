@@ -12,6 +12,8 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
   const [isOpen, setIsOpen] = useState(false)
   const [subGroups, setSubGroups] = useState([])
   const groupCount = useRef(0)
+  const [currentDraggedStudent, setCurrentDraggedStudent] = useState({})
+  const [currentDragTarget, setCurrentDragTarget] = useState([])
 
   // for setting localStorage state and react state
   const commitSubGroups = newSubGroups => {
@@ -37,6 +39,31 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
     const rerolledGroups = buildGroupsFromArray(groupParticipants)
     commitSubGroups(rerolledGroups)
     return rerolledGroups
+  }
+
+  // on drag and drop moves a student to another subgroup
+  // currentDragTarget is set up to only be sub groups inside this group
+  const handleMoveToSubGroup = () => {
+    if (currentDragTarget && currentDraggedStudent) {
+      setToast(prev => ({...prev, toastType: 'success', messages: [`${currentDraggedStudent.name} moved to new group`]}))
+      // amends subgroups so the proper student gets moved to the proper sub group then filters empty sub groups
+      const revisedGroups = subGroups.map( sg => {
+        if ( sg === currentDragTarget && !sg.includes(currentDraggedStudent) ) {
+          return [...sg, currentDraggedStudent]
+        } else if ( sg !== currentDragTarget && sg.includes(currentDraggedStudent) ) {
+          return sg.filter(s => s !== currentDraggedStudent)
+        } else {
+          return sg
+        }
+
+      })
+      .filter(sg => sg.length > 0)
+
+      commitSubGroups(revisedGroups)
+
+    }
+    setCurrentDraggedStudent({})
+    setCurrentDragTarget([])
   }
 
   // --- EFFECTS --- //
@@ -76,7 +103,20 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
   // --- RENDERS --- //
 
   const renderedSubGroups = subGroups.map((sg, i) => (
-    <SubGroupDisplay key={i} participants={sg} {...{groupName, handleRemoveFromSubGroup}} />
+    <SubGroupDisplay
+      key={i}
+      participants={sg}
+      {...{
+        groupName,
+        handleRemoveFromSubGroup,
+        setCurrentDragTarget,
+        currentDragTarget,
+        currentDraggedStudent,
+        handleMoveToSubGroup
+      }}
+      fullGroupParticipants={groupParticipants}
+      setCurrentDraggedStudent={setCurrentDraggedStudent}
+    />
   ))
 
   const buttonClassNames = "border-none border-round background-grey text-color-primary margin-weak-sides padding-small"
@@ -86,7 +126,14 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
     <div className="background-black padding-small border-round margin-weak-vertical">
 
       <h3>
-        <span className="pointer" onClick={() => setIsOpen(prev => !prev)}>{groupName} {"//"} {groupParticipants.length} students</span>
+        <span
+          className="pointer"
+          onClick={() => setIsOpen(prev => !prev)}
+        >
+
+          {groupName} {"//"} {groupParticipants.length} students
+
+        </span>
       </h3>
 
         <button
