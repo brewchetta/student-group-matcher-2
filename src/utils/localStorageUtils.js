@@ -12,7 +12,7 @@ export function clearStudents(cohortName='no-class') {
 
 export function getCohortNames() {
   const cohorts = JSON.parse(localStorage.getItem('cohort-names'))
-  return cohorts[0] ? cohorts : []
+  return cohorts && cohorts[0] ? cohorts : []
 }
 
 export function setCohortNames(cohortNames) {
