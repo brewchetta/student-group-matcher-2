@@ -1,6 +1,6 @@
 import { useToastContext } from 'context/ToastContext'
 
-function GroupParticipantDisplay({participant, handleRemoveFromSubGroup, currentGroupName}) {
+function GroupParticipantDisplay({participant, handleRemoveFromSubGroup, currentGroupName, setCurrentDraggedStudent}) {
 
   const { setToast } = useToastContext()
 
@@ -9,8 +9,25 @@ function GroupParticipantDisplay({participant, handleRemoveFromSubGroup, current
     setToast(prev => ({...prev, toastType: 'error', messages: [`${participant.name} removed from ${currentGroupName}`]}))
   }
 
+  const handleStartDrag = () => setCurrentDraggedStudent(participant)
+
+  const handleFinishDrag = () => {
+    setCurrentDraggedStudent({})
+    console.log('finishing drag:', participant);
+  }
+
   return (
-    <span style={{marginRight: "1em"}}>{participant.name} <button onClick={removeFromGroup}>X</button></span>
+    <span
+      className="grabbable"
+      draggable="true"
+      onDragStart={handleStartDrag}
+      onDragEnd={handleFinishDrag}
+      style={{marginRight: "1em"}}
+    >
+
+      {participant.name} <button onClick={removeFromGroup}>X</button>
+
+    </span>
   )
 
 }

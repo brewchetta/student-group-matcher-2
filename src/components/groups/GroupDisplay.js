@@ -12,6 +12,7 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
   const [isOpen, setIsOpen] = useState(false)
   const [subGroups, setSubGroups] = useState([])
   const groupCount = useRef(0)
+  const [currentDraggedStudent, setCurrentDraggedStudent] = useState({})
 
   // for setting localStorage state and react state
   const commitSubGroups = newSubGroups => {
@@ -76,7 +77,7 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
   // --- RENDERS --- //
 
   const renderedSubGroups = subGroups.map((sg, i) => (
-    <SubGroupDisplay key={i} participants={sg} {...{groupName, handleRemoveFromSubGroup}} />
+    <SubGroupDisplay key={i} participants={sg} {...{groupName, handleRemoveFromSubGroup}} setCurrentDraggedStudent={setCurrentDraggedStudent} />
   ))
 
   const buttonClassNames = "border-none border-round background-grey text-color-primary margin-weak-sides padding-small"
