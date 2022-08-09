@@ -1,27 +1,46 @@
+import { useState } from 'react'
 import GroupParticipantDisplay from './GroupParticipantDisplay'
 
-function GroupSubGroupDisplay({participants, groupName, handleRemoveFromSubGroup, setCurrentDraggedStudent}) {
+function GroupSubGroupDisplay({
+  participants,
+  groupName,
+  fullGroupParticipants,
+  handleRemoveFromSubGroup,
+  setCurrentDraggedStudent,
+  setCurrentDragTarget,
+  currentDragTarget,
+  currentDraggedStudent,
+  handleMoveToSubGroup
+}) {
+
+  // const [isDragged, setIsDragged] = useState(false)
+  const isDragged = currentDragTarget === participants
 
   const renderedParticipants = participants.map(participant => (
     <GroupParticipantDisplay
       key={participant.id}
       currentGroupName={groupName}
-      {...{participant, handleRemoveFromSubGroup, setCurrentDraggedStudent}}
+      {...{participant, handleRemoveFromSubGroup, setCurrentDraggedStudent, handleMoveToSubGroup}}
     />
   ))
 
   const handleDragEnter = () => {
-    console.log('dragging over this group:', participants.map(p => p.name))
+    if (currentDraggedStudent.id) {
+      setCurrentDragTarget(participants)
+    }
   }
 
-  const handleDragLeave = () => {
-    console.log('elvis has left the building');
-  }
+  // const handleDragLeave = () => setIsDragged(false)
 
   return (
 
-    <div onDragEnter={handleDragEnter} onDragLeave={handleDragLeave} className="flex row background-grey border-round margin-padding-weak">
+    <div
+      onDragOver={handleDragEnter}
+      className={`flex row background-grey border-round margin-padding-weak ${isDragged ? 'background-green' : 'background-grey'}`}
+    >
+
       {renderedParticipants}
+
     </div>
 
   )

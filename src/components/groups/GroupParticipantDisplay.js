@@ -1,6 +1,6 @@
 import { useToastContext } from 'context/ToastContext'
 
-function GroupParticipantDisplay({participant, handleRemoveFromSubGroup, currentGroupName, setCurrentDraggedStudent}) {
+function GroupParticipantDisplay({participant, handleRemoveFromSubGroup, currentGroupName, setCurrentDraggedStudent, handleMoveToSubGroup}) {
 
   const { setToast } = useToastContext()
 
@@ -11,10 +11,7 @@ function GroupParticipantDisplay({participant, handleRemoveFromSubGroup, current
 
   const handleStartDrag = () => setCurrentDraggedStudent(participant)
 
-  const handleFinishDrag = () => {
-    setCurrentDraggedStudent({})
-    console.log('finishing drag:', participant);
-  }
+  const handleFinishDrag = () => handleMoveToSubGroup()
 
   return (
     <span
