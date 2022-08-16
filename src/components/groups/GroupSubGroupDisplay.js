@@ -24,7 +24,9 @@ function GroupSubGroupDisplay({
     />
   ))
 
-  const handleDragEnter = () => {
+  const handleDragEnter = e => {
+    // prevent default stops the dragged item boomerang back to its original position
+    e.preventDefault()
     if (currentDraggedStudent.id) {
       setCurrentDragTarget(participants)
     }
