@@ -81,10 +81,16 @@ function GroupDisplay({groupParticipants, groupName, addAllToGroup, groupNames, 
 
   // creates a student in their own subgroup when they're added to the group
   useEffect(() => {
-    if (groupCount.current < groupParticipants.length) {
+    const difference = groupParticipants.length - groupCount.current
+    // if difference is only 1 then create one new subgroup
+    if (groupCount.current < groupParticipants.length && difference === 1) {
       const newSubGroup = [ groupParticipants[groupCount.current] ]
       const revisedSubGroups = [...subGroups, newSubGroup]
       commitSubGroups(revisedSubGroups)
+    }
+    // if difference is more than one (more than one student added at a time) rerandomize
+    if (groupCount.current < groupParticipants.length && difference !== 1) {
+      rerollGroup()
     }
     groupCount.current = groupParticipants.length
   }, [groupParticipants])
