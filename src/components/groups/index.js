@@ -18,8 +18,9 @@ function GroupList(props) {
   const groupNames = Object.keys(groups)
 
   useEffect(() => {
-    setCohorts(getCohortNames())
-    setSelectedCohort(getCohortNames()[0] || '')
+    const cohortNames = getCohortNames()
+    setCohorts(cohortNames)
+    setSelectedCohort(cohortNames[cohortNames.length - 1] || '')
   }, [])
 
   useEffect(() => {
