@@ -30,7 +30,7 @@ function GroupCohortStudent({student, handleAddToGroup, groupNames}) {
 
           <>
             <select className="background-white border-white text-black border-round-left background-alternate" value={selectedGroup} onChange={e => setSelectedGroup(e.target.value)}>
-            {groupNames.map(name => <option key={name} value={name}>{name.slice(0,18)}</option>)}
+            {groupNames.map(name => <option key={name} value={name}>{name.slice(0,16)}</option>)}
             </select>
 
             <button className="border-green border-round-right text-white background-green" onClick={handleAdd}>Add</button>
