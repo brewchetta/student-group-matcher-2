@@ -8,7 +8,8 @@ function GroupCohortStudent({student, handleAddToGroup, groupNames}) {
   const [selectedGroup, setSelectedGroup] = useState('')
 
   useEffect(() => {
-    setSelectedGroup(selectedGroup || groupNames[0] || '')
+    console.log(groupNames);
+    setSelectedGroup(groupNames[groupNames.length - 1] || selectedGroup || '')
   }, [groupNames, selectedGroup])
 
   const handleAdd = () => {
